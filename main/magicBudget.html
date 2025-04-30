@@ -20,7 +20,6 @@
         <div class="sidebar">
             <h2>Dashboard</h2>
             <ul>
-				<!-- dung font awesome 4. -->
                 <li><a href="#"><i class="fa fa-line-chart" aria-hidden="true"></i> Analytics</a></li>
                 <li><a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i></i> Reports</a></li>
                 <li><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i></i> Settings</a></li>
@@ -145,11 +144,150 @@
                 </script>
             </div>
         </div>
+        <button id="add-income-btn">Add Income</button>
+        <div id="income-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>NEW INCOME</h2>
+                    <div class="modal-icons">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </div>
+                    <span class="close">&times;</span>
+                </div>
+                <form id="income-form">
+                    <div class="form-group">
+                        <label for="category"><i class="fa fa-circle" style="color: #ccc;"></i> Category</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select category</option>
+                            <option value="salary">Salary</option>
+                            <option value="investments">Investments</option>
+                            <option value="freelance">Freelance</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="value"><i class="fa fa-dollar"></i> Value</label>
+                        <input type="number" id="value" name="value" step="0.01" required>
+                        <span id="total">Total: $0.00</span>
+                    </div>
+                    <div class="form-group toggle">
+                        <label><i class="fa fa-circle" style="color: #ccc;"></i> Is a refund?</label>
+                        <input type="checkbox" id="refund" name="refund">
+                        <label for="refund" class="toggle-label"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="account"><i class="fa fa-university"></i> Account</label>
+                        <select id="account" name="account" required>
+                            <option value="wallet">Wallet</option>
+                            <option value="bank">Bank</option>
+                            <option value="savings">Savings</option>
+                        </select>
+                    </div>
+                    <div class="form-group toggle">
+                        <label><i class="fa fa-check-circle" style="color: #2196F3;"></i> Checked</label>
+                        <input type="checkbox" id="checked" name="checked" checked>
+                        <label for="checked" class="toggle-label"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="date"><i class="fa fa-calendar"></i> Date</label>
+                        <input type="date" id="date" name="date" value="2025-04-28" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time"><i class="fa fa-clock-o"></i> Time</label>
+                        <input type="time" id="time" name="time" value="21:31" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="from"><i class="fa fa-user"></i> From (Optional)</label>
+                        <input type="text" id="from" name="from">
+                        <i class="fa fa-times" onclick="document.getElementById('from').value=''"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes"><i class="fa fa-pencil"></i> Notes (Optional)</label>
+                        <textarea id="notes" name="notes"></textarea>
+                        <i class="fa fa-chevron-down"></i>
+                    </div>
+                    <a href="#" class="photo-link">PHOTO (DROPBOX REQUIRED)</a>
+                    <div class="modal-footer">
+                        <button type="button" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="save-btn">Save</button>
+                        <button type="submit" class="save-add-btn">Save > +</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </main>
     <script>
         function toggleSidebar() {
             document.querySelector('.sidebar').classList.toggle('active');
         }
+                // Modal handling
+        var modal = document.getElementById("income-modal");
+        var btn = document.getElementById("add-income-btn");
+        var span = document.getElementsByClassName("close")[0];
+        var cancelBtn = document.querySelector(".cancel-btn");
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        };
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        cancelBtn.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        // Form submission
+        var form = document.getElementById("income-form");
+        form.onsubmit = function(event) {
+            event.preventDefault();
+            
+            var category = document.getElementById("category").value;
+            var value = parseFloat(document.getElementById("value").value);
+            var refund = document.getElementById("refund").checked;
+            var account = document.getElementById("account").value;
+            var checked = document.getElementById("checked").checked;
+            var date = document.getElementById("date").value;
+            var time = document.getElementById("time").value;
+            var from = document.getElementById("from").value;
+            var notes = document.getElementById("notes").value;
+
+            // Log data (replace with actual save logic)
+            console.log({
+                Category: category,
+                Value: value,
+                "Is Refund": refund,
+                Account: account,
+                Checked: checked,
+                Date: date,
+                Time: time,
+                From: from,
+                Notes: notes
+            });
+
+            // Update total (for demonstration; adjust as needed)
+            document.getElementById("total").textContent = `Total: $${value.toFixed(2)}`;
+
+            // Handle "Save > +" button (keep modal open and reset form)
+            if (event.submitter.classList.contains("save-add-btn")) {
+                form.reset();
+                document.getElementById("checked").checked = true; // Reset to default
+                document.getElementById("date").value = "2025-04-28"; // Reset to default
+                document.getElementById("time").value = "21:31"; // Reset to default
+                document.getElementById("total").textContent = "Total: $0.00";
+            } else {
+                modal.style.display = "none";
+                form.reset();
+            }
+        };
     </script>
 </body>
 </html>
