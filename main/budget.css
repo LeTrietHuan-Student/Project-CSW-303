@@ -12,7 +12,7 @@ body {
 /* Header */
 .top-header {
     background: linear-gradient(90deg, #7b2fff, #007bff, #00d4ff);
-/*    background-image: url("images/background.jpg");*/
+    /*    background-image: url("images/background.jpg");*/
     padding: 15px 20px;
     display: flex;
     align-items: center;
@@ -51,16 +51,20 @@ main {
     min-height: calc(100vh - 60px);
     background-color: #f0f4f8;
 }
- /* chinh sua mau cho so */
- .income-text {
+
+/* chinh sua mau cho so */
+.income-text {
     color: rgb(76, 175, 80);
 }
-    .expense-text {
+
+.expense-text {
     color: rgb(244, 67, 54);
-    }
-    .balance-text {
-        color: rgb(33, 150, 243);
-    }
+}
+
+.balance-text {
+    color: rgb(33, 150, 243);
+}
+
 /* Sidebar */
 .sidebar {
     width: 250px;
@@ -170,7 +174,8 @@ main {
     padding: 10px 0;
     gap: 16px;
 }
-.chart-placeholder img{
+
+.chart-placeholder img {
     width: 30%;
     padding-right: 5%;
     min-width: 200px;
@@ -206,6 +211,52 @@ main {
         padding: 20px;
     }
 }
+/* footer */
+footer {
+    background: #2e3b55;
+    color: rgb(155, 149, 149);
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 2fr));
+    gap: 20px;
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+
+footer h4 {
+    color: white;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+footer li {
+    font-size: 14px;
+    padding: 5px 0px;
+}
+
+.first-ele {
+    padding-left: 20px;
+    line-height: 1.5;
+}
+
+.second-ele {
+    padding-left: 20px
+}
+
+.third-ele {
+    padding-left: 20px
+}
+
+.third-ele a {
+    text-decoration: none;
+    color: #7d7574
+}
+
+.service-grid img {
+    width: 300px;
+}
 
 /*circle table*/
 .container {
@@ -217,65 +268,76 @@ main {
     max-width: 600px;
     gap: 16px;
 }
-.container > .stat-card{
+
+.container>.stat-card {
     width: 60%;
     min-width: 300px;
 }
-        .chart {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            position: relative;
-            margin: 0 auto;
-            min-width: 200px;
-        }
-        .chart::before {
-            content: '';
-            position: absolute;
-            width: 140px;
-            height: 140px;
-            background: white;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .total {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .month-selector {
-            margin: 20px 0;
-            padding: 5px;
-            font-size: 16px;
-        }
-        .info-container {
-            flex: 1;
-            text-align: left;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            font-weight: bold;
-        }
-        .tag-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
+
+.chart {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    margin: 0 auto;
+    min-width: 200px;
+}
+
+.chart::before {
+    content: '';
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background: white;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.total {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.month-selector {
+    margin: 20px 0;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.info-container {
+    flex: 1;
+    text-align: left;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    font-weight: bold;
+}
+
+.tag-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
 
 @media (max-width: 480px) {
     .top-header {

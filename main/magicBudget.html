@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="budget.css">
+    <link rel="stylesheet" type="text/css" href="budget.css">
 </head>
+
 <body>
     <header>
         <div class="top-header">
             <i class="fa fa-bars hamburger" onclick="toggleSidebar()"></i>
             <img src="images/logo.png" alt="Expense Tracker Logo">
-            <h1>Expense Tracker</h1>
+            <h1>Expense Tracker - Home page</h1>
         </div>
     </header>
     <main>
         <div class="sidebar">
             <h2>Dashboard</h2>
+            <a href="LoginSite.html" class="btn" target="_blank">Get Started</a>
             <ul>
-				<!-- dung font awesome 4. -->
+                <!-- dung font awesome 4. -->
                 <li><a href="#"><i class="fa fa-line-chart" aria-hidden="true"></i> Analytics</a></li>
                 <li><a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i></i> Reports</a></li>
                 <li><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i></i> Settings</a></li>
@@ -45,7 +48,7 @@
                     <p class="balance-text">$13,400.71</p>
                 </div>
             </div>
-           
+
             <div class="chart-placeholder">
                 <img src="images/expenseTable.png">
                 <div class="container">
@@ -55,7 +58,9 @@
                     <div class="stat-card">
                         <table id="expense-table-title">
                             <tr>
-                                <td><h2>CHI TIÊU</h2></td>
+                                <td>
+                                    <h2>CHI TIÊU</h2>
+                                </td>
                                 <td>
                                     <select class="month-selector" onchange="updateChart(this.value)">
                                         <option value="thang-nay">Tháng Này</option>
@@ -64,8 +69,8 @@
                                 </td>
                             </tr>
                         </table>
-                        
-                        
+
+
                         <table id="expense-table">
                             <tr>
                                 <th>DANH MỤC</th>
@@ -152,4 +157,52 @@
         }
     </script>
 </body>
+<footer>
+    <div class="footer-container">
+        <div class="first-ele">
+            <img src="Design/logopng.png" alt="" style="width: 80px;">
+            <p>Easily track your expenses, manage your budget effectively, and make smarter financial decisions. Our
+                expense tracker empowers you to take control of your personal finances, leading to greater peace of mind
+                and financial freedom in the future.</p>
+            <i class="fa fa-facebook-official" aria-hidden="true"></i>
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+        </div>
+
+        <div class="second-ele">
+            <h4>Usefull Links</h4>
+            <ul type="none">
+                <li>About us</li>
+                <li>Contact us</li>
+                <li>Terms of Services</li>
+                <li>Plan & Precing</li>
+                <li>Site Map</li>
+            </ul>
+        </div>
+
+        <div class="third-ele">
+            <h4>Contact Us</h4>
+            <ul class="phone-num" type="none">
+                <li><i class="fa fa-phone" aria-hidden="true"></i> Phone Number: +84..(The Liems)</li>
+            </ul>
+            <ul class="mail-address" type="none">
+                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> Email: theliems.support@eiu.edu.vn
+                </li>
+            </ul>
+            <ul class="address" type="none">
+                <li>
+                    <i class="fa fa-map" aria-hidden="true"></i><a
+                        href="https://maps.app.goo.gl/5MSLK73v9266wtg96" target="_blank"> Address: Thu Dau Mot - Binh
+                        Duong</a>
+                </li>
+                <li><i class="fa fa-university" aria-hidden="true"></i><a
+                        href="https://maps.app.goo.gl/usEamfmgeRZYH9u59" target="_blank"> Eastern International
+                        University</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
 </html>
