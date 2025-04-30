@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('images/login_background.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.3); /*Add translucent overlay */
+    background-blend-mode: overlay; /* Blends overlay with background image */
+}
+
+.logo-background {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    z-index: 1;
+}
+
+.magic-budget-logo {
+    width: 200px;
+     opacity: 0.7; /*make more visible */
+    transition: opacity 0.3s ease;
+}
+
+.wrapper {
+    width: 420px;
+    border: 2px solid rgba(255, 255, 255, 0.4); /*more  border */
+    backdrop-filter: blur(20px); /* Increased blur for contrast */
+    background: rgba(255, 255, 255, 0.1);/*  background tint */
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    z-index: 2;
+}
+
+.wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+    color: #ebe6e6;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 3px rgba(177, 159, 159, 0.6);
+}
+
+.wrapper .input_box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input_box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+    transition: all 0.3s ease;
+}
+
+.input_box input::placeholder {
+    color: #fff;
+}
+
+.input_box input:focus,
+.input_box input:valid {
+    border-color: #fff;
+    transform: scale(1.02);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.input_box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 25px;
+    transition: all 0.3s ease;
+}
+
+.input_box input:focus ~ i,
+.input_box input:valid ~ i {
+    right: 15px;
+    color: #fff;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.wrapper .remember_forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin: -15px 0 15px;
+}
+
+.remember_forgot label input {
+    accent-color: #fff;
+    margin-right: 3px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.remember_forgot a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.wrapper .btn {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    transition: 0.5s ease;
+}
+
+.btn:hover {
+    color: white;
+    background: linear-gradient(to right, #E55D87, #5FC3E4);
+}
+
+.wrapper .register_link {
+    font-size: 14px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.register_link a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.register_link a:hover {
+    text-decoration: underline;
+}

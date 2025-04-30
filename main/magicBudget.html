@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="budget.css">
+</head>
+<body>
+    <header>
+        <div class="top-header">
+            <i class="fa fa-bars hamburger" onclick="toggleSidebar()"></i>
+            <img src="images/logo.png" alt="Expense Tracker Logo">
+            <h1>Expense Tracker</h1>
+        </div>
+    </header>
+    <main>
+        <div class="sidebar">
+            <h2>Dashboard</h2>
+            <ul>
+				<!-- dung font awesome 4. -->
+                <li><a href="#"><i class="fa fa-line-chart" aria-hidden="true"></i> Analytics</a></li>
+                <li><a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i></i> Reports</a></li>
+                <li><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i></i> Settings</a></li>
+                <li><a href="#"><i class="fa fa-eye" aria-hidden="true"></i></i> Overview</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="stats">
+                <div class="stat-card">
+                    <i class="fa fa-money" aria-hidden="true" style="color: rgb(76, 175, 80);"></i>
+                    <h3>Total Income</h3>
+                    <p class="income-text">$13,650.71</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fa fa-shopping-cart" aria-hidden="true" style="color: rgb(244, 67, 54);"></i>
+                    <h3>Total Expenses</h3>
+                    <p class="expense-text">-$250.00</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fa fa-cc-mastercard" aria-hidden="true" style="color: rgb(33, 150, 243);"></i>
+                    <h3>Savings</h3>
+                    <p class="balance-text">$13,400.71</p>
+                </div>
+            </div>
+           
+            <div class="chart-placeholder">
+                <img src="images/expenseTable.png">
+                <div class="container">
+                    <div class="chart" id="chart">
+                        <div class="total" id="total-expense">-3,017.76</div>
+                    </div>
+                    <div class="stat-card">
+                        <table id="expense-table-title">
+                            <tr>
+                                <td><h2>CHI TIÊU</h2></td>
+                                <td>
+                                    <select class="month-selector" onchange="updateChart(this.value)">
+                                        <option value="thang-nay">Tháng Này</option>
+                                        <option value="thang-truoc">Tháng Trước</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        
+                        <table id="expense-table">
+                            <tr>
+                                <th>DANH MỤC</th>
+                                <th>CHI TIÊU</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <script>
+                    // Dữ liệu chi tiêu cho các tháng
+                    const expenseData = {
+                        "thang-nay": {
+                            total: "-3,017.76",
+                            categories: [
+                                { name: "Tiền thuê", amount: "-1,479.75", percentage: "49.03%", color: "#ff7f50" },
+                                { name: "Nhà cửa", amount: "-616.13", percentage: "20.42%", color: "#f4a460" },
+                                { name: "Ăn uống", amount: "-504.62", percentage: "16.72%", color: "#ff4040" },
+                                { name: "Mua sắm", amount: "-417.26", percentage: "13.83%", color: "#ffd700" }
+                            ]
+                        },
+                        "thang-truoc": {
+                            total: "-2,500.00",
+                            categories: [
+                                { name: "Tiền thuê", amount: "-1,200.00", percentage: "48.00%", color: "#ff7f50" },
+                                { name: "Nhà cửa", amount: "-500.00", percentage: "20.00%", color: "#f4a460" },
+                                { name: "Ăn uống", amount: "-400.00", percentage: "16.00%", color: "#ff4040" },
+                                { name: "Mua sắm", amount: "-400.00", percentage: "16.00%", color: "#ffd700" }
+                            ]
+                        }
+                    };
+
+                    // Hàm cập nhật biểu đồ và bảng
+                    function updateChart(month) {
+                        const data = expenseData[month];
+                        const chart = document.getElementById('chart');
+                        const totalExpense = document.getElementById('total-expense');
+                        const table = document.getElementById('expense-table');
+
+                        // Cập nhật tổng chi tiêu
+                        totalExpense.textContent = data.total;
+
+                        // Tạo gradient cho biểu đồ tròn
+                        let gradient = '';
+                        let accumulatedPercentage = 0;
+                        data.categories.forEach(category => {
+                            const percentage = parseFloat(category.percentage);
+                            gradient += `${category.color} ${accumulatedPercentage}% ${accumulatedPercentage + percentage}%`;
+                            accumulatedPercentage += percentage;
+                            if (category !== data.categories[data.categories.length - 1]) {
+                                gradient += ', ';
+                            }
+                        });
+                        chart.style.background = `conic-gradient(${gradient})`;
+
+                        // Cập nhật bảng
+                        table.innerHTML = `
+                            <tr>
+                                <th>DANH MỤC</th>
+                                <th>CHI TIÊU</th>
+                            </tr>
+                            ${data.categories.map(category => `
+                                <tr>
+                                    <td><span class="tag-color" style="background-color: ${category.color};"></span>${category.name}</td>
+                                    <td>${category.amount} (${category.percentage})</td>
+                                </tr>
+                            `).join('')}
+                            <tr>
+                                <td><strong>TỔNG</strong></td>
+                                <td><strong>${data.total} (100.00%)</strong></td>
+                            </tr>
+                        `;
+                    }
+
+                    // Khởi tạo với dữ liệu tháng này
+                    updateChart('thang-nay');
+                </script>
+            </div>
+        </div>
+    </main>
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
