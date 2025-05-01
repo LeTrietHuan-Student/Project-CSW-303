@@ -8,7 +8,11 @@
 body {
     background-color: #f5f7fa;
 }
-
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
 /* Header */
 .top-header {
     background: linear-gradient(90deg, #7b2fff, #007bff, #00d4ff);
@@ -46,7 +50,7 @@ body {
 }
 
 /* Main Layout */
-main {
+.mainLayout {
     display: flex;
     min-height: calc(100vh - 60px);
     background-color: #f0f4f8;
@@ -65,14 +69,22 @@ main {
     color: rgb(33, 150, 243);
 }
 
+.expense-text {
+    color: rgb(244, 67, 54);
+}
+.balance-text {
+    color: rgb(33, 150, 243);
+}
 /* Sidebar */
 .sidebar {
     width: 250px;
+    height: 100%;
     background: #1a2a44;
     padding: 30px 20px;
     color: white;
     transition: transform 0.3s ease;
     border-right: 1px solid #2e3b55;
+    position: fixed;
 }
 
 .sidebar h2 {
@@ -118,6 +130,7 @@ main {
     background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('images/background.jpg');
     background-size: cover;
     background-position: center;
+    padding-left: 280px;
 }
 
 /* Stats */
@@ -181,6 +194,339 @@ main {
     min-width: 200px;
 }
 
+
+
+/*circle table*/
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    gap: 16px;
+}
+.container > .stat-card{
+    width: 60%;
+    min-width: 300px;
+}
+.chart {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    margin: 0 auto;
+    min-width: 200px;
+}
+.chart::before {
+    content: '';
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background: white;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.total {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+}
+.month-selector {
+    margin: 20px 0;
+    padding: 5px;
+    font-size: 16px;
+}
+.info-container {
+    flex: 1;
+    text-align: left;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+th {
+    font-weight: bold;
+}
+.tag-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+
+/* chức năng input */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 99;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 6% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 500px;
+    top: 100px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.modal-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-icons i {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    width: 120px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form-group i {
+    margin-right: 5px;
+}
+
+#total {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle input {
+    display: none;
+}
+
+.toggle-label {
+    position: relative;
+    display: inline-block;
+    width: 40px; /* Default width for toggles (e.g., "Is a refund?") */
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.toggle-label.checked-toggle {
+    width: 40px; /* Shortened width for the "Checked" toggle */
+}
+.toggle-label.refund-toggle {
+    width: 40px; /* Shortened width for the "Checked" toggle */
+}
+
+.toggle-label::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: 0.3s;
+}
+
+.toggle input:checked + .toggle-label {
+    background-color: #2196F3;
+}
+
+.toggle input:checked + .toggle-label::after {
+    left: 22px; /* For default toggle (40px - 16px - 2px) */
+}
+
+.toggle input:checked + .toggle-label.checked-toggle::after {
+    left: 20px; /* For "Checked" toggle (30px - 16px - 2px) */
+}
+
+.photo-link {
+    color: #1E90FF;
+    text-decoration: none;
+    margin-top: 10px;
+    display: block;
+    font-size: 14px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-footer button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.cancel-btn {
+    background-color: #ccc;
+    color: #333;
+}
+
+.save-btn,
+.save-add-btn {
+    background-color: #4CAF50;
+    color: #fff;
+}
+#add-income-btn {
+    padding: 10px 20px;
+    background-color: rgb(67, 160, 71);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0;
+    vertical-align: middle;
+    position: fixed;
+    right: 10px;
+    bottom: 20px;
+    z-index: 98;
+}
+#add-income-btn:hover{
+    background: linear-gradient(to right, #E55D87, #5FC3E4);
+   
+}
+
+
+/* biểu đồ đường */
+.lineChart > .chart-placeholder{
+    margin-top: 30px;
+    background-color: rgb(190, 216, 232);
+}
+.chart-container {
+    position: relative;
+    width: 700px;
+    height: 300px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Đặt chiều rộng linh hoạt */
+    max-width: 710px;
+    overflow: hidden;
+    overflow-x: auto
+}
+.chart-container:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+.line {
+    fill: none;
+    stroke: rgb(255, 0, 0);
+    stroke-width: 2;
+}
+.area {
+    fill: rgba(214, 228, 82, 0.333);
+}
+.axis text {
+    font-size: 12px;
+}
+.axis line {
+    stroke: #cccccc;
+}
+
+
+/* giao diện trên điện thoại */
+@media (max-width: 480px) {
+    .top-header {
+        padding: 10px;
+    }
+
+    .top-header h1 {
+        font-size: 18px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-placeholder {
+        height: auto;
+    }
+    .modal-content {
+        background-color: #fff;
+        margin: 9% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 90%;
+        max-width: 500px;
+        top: 100px;
+        border-radius: 10px;
+    }
+}
 /* Responsive Design */
 @media (max-width: 768px) {
     .sidebar {
