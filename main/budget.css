@@ -184,7 +184,7 @@ header {
     border-radius: 8px;
     color: #666;
     font-size: 16px;
-    padding: 10px 0;
+    padding: 20px 0;
     gap: 16px;
 }
 
@@ -266,6 +266,28 @@ th {
     vertical-align: middle;
 }
 
+/* bảng cột*/
+.barChart .chart-placeholder {
+    margin-top: 20px;
+}
+
+.barChart .chart-container {  /*  Thay đổi bảng trắng*/
+    text-align: center;
+    width: 800px;
+    margin: 0 auto; /* Center the container */
+    height: auto ;
+}
+
+.barChart h2 {
+    font-size: 1.8em; /* Slightly larger title */
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.barChart svg {
+    display: block;
+    margin: 0 auto;
+}
 
 /* chức năng input */
 .modal {
