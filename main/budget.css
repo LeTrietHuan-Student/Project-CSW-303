@@ -394,7 +394,7 @@ th {
 .toggle-label {
     position: relative;
     display: inline-block;
-    width: 40px; /* Default width for toggles (e.g., "Is a refund?") */
+    width: 40px;
     height: 20px;
     background-color: #ccc;
     border-radius: 10px;
@@ -415,8 +415,8 @@ th {
     height: 16px;
     background-color: #fff;
     border-radius: 50%;
-    top: 2px;
-    left: 2px;
+    top: 1px;
+    left: 1px;
     transition: 0.3s;
 }
 
@@ -425,11 +425,7 @@ th {
 }
 
 .toggle input:checked + .toggle-label::after {
-    left: 22px; /* For default toggle (40px - 16px - 2px) */
-}
-
-.toggle input:checked + .toggle-label.checked-toggle::after {
-    left: 20px; /* For "Checked" toggle (30px - 16px - 2px) */
+    left: 21px;
 }
 
 .photo-link {
