@@ -8,15 +8,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="budget.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="js/reminder.js"></script>
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        }
+    </script>
+    
 </head>
 
 <body>
     <header>
         <div class="top-header">
             <i class="fa fa-bars hamburger" onclick="toggleSidebar()"></i>
-            <img src="images/logo.png" alt="Expense Tracker Logo">
-            <h1>Expense Tracker - Home page</h1>
+            <a href="magicBudget.html"><img src="images/logo.png" alt="Expense Tracker Logo"></a>
+            <h1>Expense Tracker</h1>
         </div>
     </header>
     <div class="mainLayout">
@@ -24,11 +30,10 @@
             <h2>Dashboard</h2>
             <a href="LoginSite.html" class="btn" target="_blank">Get Started</a>
             <ul>
-                <!-- dung font awesome 4. -->
                 <li><a href="#"><i class="fa fa-line-chart" aria-hidden="true"></i> Analytics</a></li>
-                <li><a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i></i> Reports</a></li>
-                <li><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i></i> Settings</a></li>
-                <li><a href="#"><i class="fa fa-eye" aria-hidden="true"></i></i> Overview</a></li>
+                <li><a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> Reports</a></li>
+                <li><a href="setting.html"><i class="fa fa-cogs" aria-hidden="true"></i> Settings</a></li>
+                <li><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Overview</a></li>
             </ul>
         </div>
 
@@ -51,163 +56,86 @@
                     <p class="balance-text">$13,400.71</p>
                 </div>
             </div>
-<<<<<<< Updated upstream
-
-=======
             <!-- input -->
-                <button id="add-income-btn">Add Income</button>
-                <div id="income-modal" class="modal">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2>NEW INCOME</h2>
-                            <div class="modal-icons">
-                                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                <i class="fa fa-refresh" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                            <span class="close">&times;</span>
+            <button id="add-income-btn">Add Income</button>
+            <div id="income-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>NEW INCOME</h2>
+                        <div class="modal-icons">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
                         </div>
-                        <form id="income-form">
-                            <div class="form-group">
-                                <label for="category"><i class="fa fa-circle" style="color: #ccc;"></i> Category</label>
-                                <select id="category" name="category" required>
-                                    <option value="">Select category</option>
-                                    <option value="salary">Salary</option>
-                                    <option value="investments">Investments</option>
-                                    <option value="freelance">Freelance</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="value"><i class="fa fa-dollar"></i> Value</label>
-                                <input type="number" id="value" name="value" step="0.01" required>
-                                <span id="total">Total: $0.00</span>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fa fa-circle" style="color: #ccc;"></i> Is a refund?</label>
-                                <div class="toggle">
-                                    <input type="checkbox" id="refund" name="refund">
-                                    <label for="refund" class="toggle-label refund-toggle"></label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="account"><i class="fa fa-university"></i> Account</label>
-                                <select id="account" name="account" required>
-                                    <option value="wallet">Wallet</option>
-                                    <option value="bank">Bank</option>
-                                    <option value="savings">Savings</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fa fa-check-circle" style="color: #2196F3;"></i> Checked</label>
-                                <div class="toggle">
-                                    <input type="checkbox" id="checked" checked>
-                                    <label class="toggle-label checked-toggle" for="checked"></label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="date"><i class="fa fa-calendar"></i> Date</label>
-                                <input type="date" id="date" name="date" value="2025-04-28" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="time"><i class="fa fa-clock-o"></i> Time</label>
-                                <input type="time" id="time" name="time" value="21:31" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="from"><i class="fa fa-user"></i> From (Optional)</label>
-                                <input type="text" id="from" name="from">
-                                <i class="fa fa-times" onclick="document.getElementById('from').value=''"></i>
-                            </div>
-                            <div class="form-group">
-                                <label for="notes"><i class="fa fa-pencil"></i> Notes (Optional)</label>
-                                <textarea id="notes" name="notes"></textarea>
-                                <i class="fa fa-chevron-down"></i>
-                            </div>
-                            <a href="#" class="photo-link">PHOTO (DROPBOX REQUIRED)</a>
-                            <div class="modal-footer">
-                                <button type="button" class="cancel-btn">Cancel</button>
-                                <button type="submit" class="save-btn">Save</button>
-                                <button type="submit" class="save-add-btn">Save > +</button>
-                            </div>
-                        </form>
+                        <span class="close">&times;</span>
                     </div>
+                    <form id="income-form">
+                        <div class="form-group">
+                            <label for="category"><i class="fa fa-circle" style="color: #ccc;"></i> Category</label>
+                            <select id="category" name="category" required>
+                                <option value="">Select category</option>
+                                <option value="salary">Salary</option>
+                                <option value="investments">Investments</option>
+                                <option value="freelance">Freelance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="value"><i class="fa fa-dollar"></i> Value</label>
+                            <input type="number" id="value" name="value" step="0.01" required>
+                            <span id="total">Total: $0.00</span>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa fa-circle" style="color: #ccc;"></i> Is a refund?</label>
+                            <div class="toggle">
+                                <input type="checkbox" id="refund" name="refund">
+                                <label for="refund" class="toggle-label refund-toggle"></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="account"><i class="fa fa-university"></i> Account</label>
+                            <select id="account" name="account" required>
+                                <option value="wallet">Wallet</option>
+                                <option value="bank">Bank</option>
+                                <option value="savings">Savings</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa fa-check-circle" style="color: #2196F3;"></i> Checked</label>
+                            <div class="toggle">
+                                <input type="checkbox" id="checked" checked>
+                                <label class="toggle-label checked-toggle" for="checked"></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="date"><i class="fa fa-calendar"></i> Date</label>
+                            <input type="date" id="date" name="date" value="2025-04-28" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time"><i class="fa fa-clock-o"></i> Time</label>
+                            <input type="time" id="time" name="time" value="21:31" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="from"><i class="fa fa-user"></i> From (Optional)</label>
+                            <input type="text" id="from" name="from">
+                            <i class="fa fa-times" onclick="document.getElementById('from').value=''"></i>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes"><i class="fa fa-pencil"></i> Notes (Optional)</label>
+                            <textarea id="notes" name="notes"></textarea>
+                            <i class="fa fa-chevron-down"></i>
+                        </div>
+                        <a href="#" class="photo-link">PHOTO (DROPBOX REQUIRED)</a>
+                        <div class="modal-footer">
+                            <button type="button" class="cancel-btn">Cancel</button>
+                            <button type="submit" class="save-btn">Save</button>
+                            <button type="submit" class="save-add-btn">Save > +</button>
+                        </div>
+                    </form>
                 </div>
-                
-                <script>
-                    function toggleSidebar() {
-                        document.querySelector('.sidebar').classList.toggle('active');
-                    }
-                            // Modal handling
-                    var modal = document.getElementById("income-modal");
-                    var btn = document.getElementById("add-income-btn");
-                    var span = document.getElementsByClassName("close")[0];
-                    var cancelBtn = document.querySelector(".cancel-btn");
-        
-                    btn.onclick = function() {
-                        modal.style.display = "block";
-                    };
-        
-                    span.onclick = function() {
-                        modal.style.display = "none";
-                    };
-        
-                    cancelBtn.onclick = function() {
-                        modal.style.display = "none";
-                    };
-        
-                    window.onclick = function(event) {
-                        if (event.target == modal) {
-                            modal.style.display = "none";
-                        }
-                    };
-        
-                    // Form submission
-                    var form = document.getElementById("income-form");
-                    form.onsubmit = function(event) {
-                        event.preventDefault();
-                        
-                        var category = document.getElementById("category").value;
-                        var value = parseFloat(document.getElementById("value").value);
-                        var refund = document.getElementById("refund").checked;
-                        var account = document.getElementById("account").value;
-                        var checked = document.getElementById("checked").checked;
-                        var date = document.getElementById("date").value;
-                        var time = document.getElementById("time").value;
-                        var from = document.getElementById("from").value;
-                        var notes = document.getElementById("notes").value;
-        
-                        // Log data (replace with actual save logic)
-                        console.log({
-                            Category: category,
-                            Value: value,
-                            "Is Refund": refund,
-                            Account: account,
-                            Checked: checked,
-                            Date: date,
-                            Time: time,
-                            From: from,
-                            Notes: notes
-                        });
-        
-                        // Update total (for demonstration; adjust as needed)
-                        document.getElementById("total").textContent = `Total: $${value.toFixed(2)}`;
+            </div>
+            <script src="js/input.js"></script>
 
-
-                        // Handle "Save > +" button (keep modal open and reset form)
-                        if (event.submitter.classList.contains("save-add-btn")) {
-                            form.reset();
-                            document.getElementById("checked").checked = true; // Reset to default
-                            document.getElementById("date").value = "2025-04-28"; // Reset to default
-                            document.getElementById("time").value = "21:31"; // Reset to default
-                            document.getElementById("total").textContent = "Total: $0.00";
-                        } else {
-    
-                            modal.style.display = "none";
-                            form.reset();
-                        }
-                    };
-                </script>
             <!-- Circle table -->
->>>>>>> Stashed changes
             <div class="chart-placeholder">
                 <img src="images/expenseTable.png">
                 <div class="container">
@@ -228,8 +156,6 @@
                                 </td>
                             </tr>
                         </table>
-
-
                         <table id="expense-table">
                             <tr>
                                 <th>DANH MỤC</th>
@@ -238,372 +164,228 @@
                         </table>
                     </div>
                 </div>
-
-                <script>
-                    // Dữ liệu chi tiêu cho các tháng
-                    const expenseData = {
-                        "thang-nay": {
-                            total: "-3,017.76",
-                            categories: [
-                                { name: "Tiền thuê", amount: "-1,479.75", percentage: "49.03%", color: "#ff7f50" },
-                                { name: "Nhà cửa", amount: "-616.13", percentage: "20.42%", color: "#f4a460" },
-                                { name: "Ăn uống", amount: "-504.62", percentage: "16.72%", color: "#ff4040" },
-                                { name: "Mua sắm", amount: "-417.26", percentage: "13.83%", color: "#ffd700" }
-                            ]
-                        },
-                        "thang-truoc": {
-                            total: "-2,500.00",
-                            categories: [
-                                { name: "Tiền thuê", amount: "-1,200.00", percentage: "48.00%", color: "#ff7f50" },
-                                { name: "Nhà cửa", amount: "-500.00", percentage: "20.00%", color: "#f4a460" },
-                                { name: "Ăn uống", amount: "-400.00", percentage: "16.00%", color: "#ff4040" },
-                                { name: "Mua sắm", amount: "-400.00", percentage: "16.00%", color: "#ffd700" }
-                            ]
-                        }
-                    };
-
-                    // Hàm cập nhật biểu đồ và bảng
-                    function updateChart(month) {
-                        const data = expenseData[month];
-                        const chart = document.getElementById('chart');
-                        const totalExpense = document.getElementById('total-expense');
-                        const table = document.getElementById('expense-table');
-
-                        // Cập nhật tổng chi tiêu
-                        totalExpense.textContent = data.total;
-
-                        // Tạo gradient cho biểu đồ tròn
-                        let gradient = '';
-                        let accumulatedPercentage = 0;
-                        data.categories.forEach(category => {
-                            const percentage = parseFloat(category.percentage);
-                            gradient += `${category.color} ${accumulatedPercentage}% ${accumulatedPercentage + percentage}%`;
-                            accumulatedPercentage += percentage;
-                            if (category !== data.categories[data.categories.length - 1]) {
-                                gradient += ', ';
-                            }
-                        });
-                        chart.style.background = `conic-gradient(${gradient})`;
-
-                        // Cập nhật bảng
-                        table.innerHTML = `
-                            <tr>
-                                <th>DANH MỤC</th>
-                                <th>CHI TIÊU</th>
-                            </tr>
-                            ${data.categories.map(category => `
-                                <tr>
-                                    <td><span class="tag-color" style="background-color: ${category.color};"></span>${category.name}</td>
-                                    <td>${category.amount} (${category.percentage})</td>
-                                </tr>
-                            `).join('')}
-                            <tr>
-                                <td><strong>TỔNG</strong></td>
-                                <td><strong>${data.total} (100.00%)</strong></td>
-                            </tr>
-                        `;
-                    }
-
-                    // Khởi tạo với dữ liệu tháng này
-                    updateChart('thang-nay');
-                </script>
+                <script src="js/CircleChart.js"></script>
             </div>
 
-            <!-- </div> -->
+
+            <!-- line table-->
             <div class="lineChart">
                 <div class="chart-placeholder">
                     <!-- <div class="stat-card"> -->
                     <div class="chart-container">
-
                         <svg width="600" height="300"></svg>
                     </div>
-
-                    <script>
-                        // Dữ liệu
-                        const data = [
-                            { date: 'Feb 24', balance: 11500 },
-                            { date: 'Mar 3', balance: 11500 },
-                            { date: 'Mar 10', balance: 11500 },
-                            { date: 'Mar 17', balance: 11500 },
-                            { date: 'Mar 24', balance: 11400 },
-                            { date: 'Mar 31', balance: 12500 },
-                            { date: 'Apr 7', balance: 12500 },
-                            { date: 'Apr 14', balance: 12400 },
-                            { date: 'Apr 21', balance: 12500 },
-                            { date: 'Apr 28', balance: 13500 }
-                        ];
-
-                        // Kích thước biểu đồ
-                        const width = 700;
-                        const height = 300;
-                        const margin = { top: 20, right: 25, bottom: 30, left: 60 };
-                        const chartWidth = width - margin.left - margin.right;
-                        const chartHeight = height - margin.top - margin.bottom;
-
-                        // Tạo SVG
-                        const svg = document.querySelector('svg');
-                        svg.setAttribute('width', width);
-                        svg.setAttribute('height', height);
-
-                        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-                        g.setAttribute('transform', `translate(${margin.left},${margin.top})`);
-                        svg.appendChild(g);
-
-                        // Tỷ lệ
-                        const xScale = (index) => (index * chartWidth) / (data.length - 1);
-                        const yScale = (value) => {
-                            const min = 11000;
-                            const max = 14000;
-                            return chartHeight - ((value - min) * chartHeight) / (max - min);
-                        };
-
-                        // Tạo tooltip
-                        const tooltip = document.createElement('div');
-                        tooltip.style.position = 'absolute';
-                        tooltip.style.backgroundColor = 'white';
-                        tooltip.style.border = '1px solid #ccc';
-                        tooltip.style.borderRadius = '5px';
-                        tooltip.style.padding = '5px';
-                        tooltip.style.boxShadow = '0 0 5px rgba(0,0,0,0.2)';
-                        tooltip.style.pointerEvents = 'none';
-                        tooltip.style.display = 'none';
-                        document.body.appendChild(tooltip);
-
-
-
-                        // Vẽ đường
-                        let linePath = `M0,${yScale(data[0].balance)}`;
-                        for (let i = 1; i < data.length; i++) {
-                            linePath += ` L${xScale(i)},${yScale(data[i].balance)}`;
-                        }
-
-                        const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                        line.setAttribute('d', linePath);
-                        line.setAttribute('class', 'line');
-                        g.appendChild(line);
-
-                        // Vẽ vùng dưới đường
-                        let areaPath = `M0,${yScale(data[0].balance)}`;
-                        for (let i = 1; i < data.length; i++) {
-                            areaPath += ` L${xScale(i)},${yScale(data[i].balance)}`;
-                        }
-                        areaPath += ` L${xScale(data.length - 1)},${chartHeight} L0,${chartHeight} Z`;
-
-                        const area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                        area.setAttribute('d', areaPath);
-                        area.setAttribute('class', 'area');
-                        g.appendChild(area);
-
-                        // Vẽ trục x
-                        data.forEach((d, i) => {
-                            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                            text.setAttribute('x', xScale(i));
-                            text.setAttribute('y', chartHeight + 20);
-                            text.setAttribute('text-anchor', 'middle');
-                            text.textContent = d.date;
-                            g.appendChild(text);
-                        });
-
-                        // Vẽ trục y
-                        const yTicks = [11000, 11500, 12000, 12500, 13000, 13500, 14000];
-                        yTicks.forEach(value => {
-                            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                            text.setAttribute('x', -10);
-                            text.setAttribute('y', yScale(value));
-                            text.setAttribute('text-anchor', 'end');
-                            text.setAttribute('dy', '0.32em');
-                            text.textContent = `$${value / 1000}k`;
-                            g.appendChild(text);
-
-                            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                            line.setAttribute('x1', 0);
-                            line.setAttribute('y1', yScale(value));
-                            line.setAttribute('x2', chartWidth);
-                            line.setAttribute('y2', yScale(value));
-                            line.setAttribute('stroke', '#ccc');
-                            g.appendChild(line);
-                        });
-                        // chấm tròn và sự kiện
-                        data.forEach((d, i) => {
-                            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                            circle.setAttribute('cx', xScale(i)); // Tọa độ x
-                            circle.setAttribute('cy', yScale(d.balance)); // Tọa độ y
-                            circle.setAttribute('r', 4); // Bán kính chấm tròn
-                            circle.setAttribute('fill', 'steelblue'); // Màu chấm tròn
-
-                            // Thêm sự kiện chuột
-                            circle.addEventListener('mouseover', (event) => {
-                                tooltip.style.display = 'block';
-                                tooltip.innerHTML = `<div>${d.date}</div><div>$${d.balance.toLocaleString()}</div>`;
-                            });
-<<<<<<< Updated upstream
-                            circle.addEventListener('mousemove', (event) => {
-                                tooltip.style.left = `${event.pageX + 10}px`;
-                                tooltip.style.top = `${event.pageY + 10}px`;
-                            });
-                            circle.addEventListener('mouseout', () => {
-                                tooltip.style.display = 'none';
-                            });
-
-                            g.appendChild(circle);
-                        });
-                    </script>
-
-=======
-                        </script>
-
-                        
-                    
->>>>>>> Stashed changes
+                    <script src="js/lineChart.js"></script>
                     <img src="images/balance.png">
                 </div>
             </div>
 
-<<<<<<< Updated upstream
             <!-- Bar Chart -->
             <div class="barChart">
+                
                 <div class="chart-placeholder">
+                    <h2>Daily Expenses for the Last 7 Days</h2>
                     <div class="chart-container">
-                        <h2>Daily Expenses for the Last 7 Days</h2>
-                        <svg width="800" height="400"></svg>
+                        <svg width="700" height="400"></svg>
                     </div>
-                    <script>
-                        // Data for the bar chart (last 7 days expenses)
-                        const barData = [
-                            { date: "22 Tue", expense: 120, color: "#ff4040" },
-                            { date: "23 Wed", expense: 40, color: "#4caf50" },
-                            { date: "24 Thu", expense: 20, color: "#ff4040" },
-                            { date: "25 Fri", expense: 80, color: "#ff4040" },
-                            { date: "26 Sat", expense: 50, color: "#ff4040" },
-                            { date: "27 Sun", expense: 30, color: "#ff4040" },
-                            { date: "28 Mon", expense: 70, color: "#4caf50" }
-                        ];
-
-
-                        const barWidth = 600;
-                        const barHeight = 400;
-                        const barMargin = { top: 40, right: 25, bottom: 70, left: 60 };
-                        const barChartWidth = barWidth - barMargin.left - barMargin.right;
-                        const barChartHeight = barHeight - barMargin.top - barMargin.bottom;
-
-                        // Select the SVG for the bar chart
-                        const barSvg = d3.select(".barChart .chart-container svg")
-                            .attr("width", barWidth)
-                            .attr("height", barHeight);
-
-                        const barG = barSvg.append("g")
-                            .attr("transform", `translate(${barMargin.left},${barMargin.top})`);
-
-                        // Scales
-                        const xScaleBar = d3.scaleBand()
-                            .domain(barData.map(d => d.date))
-                            .range([0, barChartWidth])
-                            .padding(0.2);
-
-                        const yScaleBar = d3.scaleLinear()
-                            .domain([0, 120])
-                            .range([barChartHeight, 0]);
-
-                        // Draw bars
-                        barG.selectAll("rect")
-                            .data(barData)
-                            .enter()
-                            .append("rect")
-                            .attr("x", d => xScaleBar(d.date))
-                            .attr("y", d => yScaleBar(d.expense))
-                            .attr("width", xScaleBar.bandwidth())
-                            .attr("height", d => barChartHeight - yScaleBar(d.expense))
-                            .attr("fill", d => d.color);
-
-                        // X-axis
-                        barG.append("g")
-                            .attr("transform", `translate(0,${barChartHeight})`)
-                            .call(d3.axisBottom(xScaleBar))
-                            .selectAll("text")
-                            .style("font-size", "14px") 
-                            .attr("transform", "rotate(-45)") 
-                            .attr("text-anchor", "end")
-                            .attr("x", -10)
-                            .attr("y", 10);
-
-                        // Y-axis
-                        barG.append("g")
-                            .call(d3.axisLeft(yScaleBar)
-                                .tickFormat(d => `$${d}`))
-                            .selectAll("text")
-                            .style("font-size", "14px"); 
-
-                        // Add Y-axis label
-                        barSvg.append("text")
-                            .attr("transform", "rotate(-90)")
-                            .attr("x", -barHeight / 2)
-                            .attr("y", 20)
-                            .style("text-anchor", "middle")
-                            .text("Expenses")
-                            .style("font-size", "16px"); 
-                    </script>
-=======
-            <!-- bar chart-->
-            <div class="lineChart">
-                <div class="chart-placeholder">
-                    <div class="chart-container">
-                        <svg width="600" height="300"></svg>
-                    </div>
-                    <img src="images/balance.png">
->>>>>>> Stashed changes
+                    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                    <script src="https://d3js.org/d3.v6.min.js"></script>
+                    <script src="js/barChart.js"></script>
                 </div>
             </div>
+            <div class="budget-container">
+                <!-- Budget Item -->
+                <div class="budget-item">
+                    <img src="images/entertainment.png" alt="Entertainment Icon" />
+                    <div class="details">
+                        <div class="title">Entertainment</div>
+                        <div class="dates">
+                            <span>04/28/2025</span>
+                            <span>05/04/2025</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="fill" style="width: 0%">0%</div>
+                        </div>
+                        <div class="amounts">
+                            <span>$0.00</span>
+                            <span>$30.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="budget-item">
+                    <img src="images/eating.png" alt="Eating Out Icon" />
+                    <div class="details">
+                        <div class="title">Eating out</div>
+                        <div class="dates">
+                            <span>04/01/2025</span>
+                            <span>04/30/2025</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="fill" style="width: 46%">46%</div>
+                        </div>
+                        <div class="amounts">
+                            <span>$45.50</span>
+                            <span>$100.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="budget-item">
+                    <img src="images/fuel.png" alt="Fuel Icon" />
+                    <div class="details">
+                        <div class="title">Fuel</div>
+                        <div class="dates">
+                            <span>04/01/2025</span>
+                            <span>04/30/2025</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="fill" style="width: 25%">25%</div>
+                        </div>
+                        <div class="amounts">
+                            <span>$30.00</span>
+                            <span>$120.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- transactions -->
+            <div class="transactions-section">
+                <h2>Transactions</h2>
+                <table id="transactions-table">
+                    <tr>
+                        <th>Category</th>
+                        <th>Payment Method</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                    <tr class="transaction-row">
+                        <td><span class="tag-icon"><i class="fa fa-beer" aria-hidden="true"></i></span> Bar</td>
+                        <td>WALLET</td>
+                        <td class="expense-text">-$2.00</td>
+                        <td>04/28/2025, 05:24 PM</td>
+                    </tr>
+                    <tr class="transaction-row">
+                        <td><span class="tag-icon"><i class="fa fa-film" aria-hidden="true"></i></span> Entertainment
+                        </td>
+                        <td>WALLET</td>
+                        <td class="expense-text">-$8.00</td>
+                        <td>04/27/2025, 05:44 PM</td>
+                    </tr>
+                    <tr class="transaction-row">
+                        <td><span class="tag-icon"><i class="fa fa-cutlery" aria-hidden="true"></i></span> Eating out
+                        </td>
+                        <td>CREDIT CARD</td>
+                        <td class="expense-text">-$16.00</td>
+                        <td>04/27/2025, 05:44 PM</td>
+                    </tr>
+                    <tr class="transaction-row">
+                        <td><span class="tag-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                            Shopping, Food, Pets</td>
+                        <td>CREDIT CARD</td>
+                        <td class="expense-text">-$550.00</td>
+                        <td>04/26/2025, 09:34 PM</td>
+                    </tr>
+                    <tr class="transaction-row">
+                        <td><span class="tag-icon"><i class="fa fa-free-code-camp" aria-hidden="true"></i></span> Fuel</td>
+                        <td>WALLET</td>
+                        <td class="expense-text">-$15.00</td>
+                        <td>04/25/2025, 05:24 PM</td>
+                    </tr>
+                </table>
+                <script src="js/transaction.js"></script>
+            </div>
+
+            <!-- remider -->
+            <div class="reminders-section" id="reminders-section">
+                <h2>Reminders</h2>
+                <table id="reminders-table">
+                    <tr>
+                        <th>Due</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+                </table>
+                <button id="add-reminder-btn">Add Reminder</button>
+                <div id="reminder-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>NEW REMINDER</h2>
+                            <span class="close">&times;</span>
+                        </div>
+                        <form id="reminder-form">
+                            <div class="form-group">
+                                <label for="reminder-date"><i class="fa fa-calendar"></i> Due Date</label>
+                                <input type="date" id="reminder-date" name="reminder-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reminder-description"><i class="fa fa-pencil"></i> Description</label>
+                                <input type="text" id="reminder-description" name="reminder-description" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reminder-amount"><i class="fa fa-dollar"></i> Amount</label>
+                                <input type="number" id="reminder-amount" name="reminder-amount" step="0.01" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="cancel-btn">Cancel</button>
+                                <button type="submit" class="save-btn">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
-    </div>
-    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="first-ele">
+                <img src="Design/logopng.png" alt="" style="width: 80px;">
+                <p>Easily track your expenses, manage your budget effectively, and make smarter financial decisions. Our
+                    expense tracker empowers you to take control of your personal finances, leading to greater peace of
+                    mind
+                    and financial freedom in the future.</p>
+                <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+            </div>
+
+            <div class="second-ele">
+                <h4>Usefull Links</h4>
+                <ul type="none">
+                    <li>About us</li>
+                    <li>Contact us</li>
+                    <li>Terms of Services</li>
+                    <li>Plan & Precing</li>
+                    <li>Site Map</li>
+                </ul>
+            </div>
+
+            <div class="third-ele">
+                <h4>Contact Us</h4>
+                <ul class="phone-num" type="none">
+                    <li><i class="fa fa-phone" aria-hidden="true"></i> Phone Number: +84..(LmaoLmao)</li>
+                </ul>
+                <ul class="mail-address" type="none">
+                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i> Email: <a href="/cdn-cgi/l/email-protection"
+                            class="__cf_email__"
+                            data-cfemail="d4e0fcf1f8fdf1f9e7bae7e1e4e4fbe6e0d4f1fde1baf1f0e1bae2fa">[email&#160;protected]</a>
+                    </li>
+                </ul>
+                <ul class="address" type="none">
+                    <li>
+                        <i class="fa fa-map" aria-hidden="true"></i><a href="https://maps.app.goo.gl/5MSLK73v9266wtg96"
+                            target="_blank"> Address: Thu Dau Mot - Binh
+                            Duong</a>
+                    </li>
+                    <li><i class="fa fa-university" aria-hidden="true"></i><a
+                            href="https://maps.app.goo.gl/usEamfmgeRZYH9u59" target="_blank"> Eastern International
+                            University</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
-<footer>
-    <div class="footer-container">
-        <div class="first-ele">
-            <img src="Design/logopng.png" alt="" style="width: 80px;">
-            <p>Easily track your expenses, manage your budget effectively, and make smarter financial decisions. Our
-                expense tracker empowers you to take control of your personal finances, leading to greater peace of mind
-                and financial freedom in the future.</p>
-            <i class="fa fa-facebook-official" aria-hidden="true"></i>
-            <i class="fa fa-instagram" aria-hidden="true"></i>
-        </div>
-
-        <div class="second-ele">
-            <h4>Usefull Links</h4>
-            <ul type="none">
-                <li>About us</li>
-                <li>Contact us</li>
-                <li>Terms of Services</li>
-                <li>Plan & Precing</li>
-                <li>Site Map</li>
-            </ul>
-        </div>
-
-        <div class="third-ele">
-            <h4>Contact Us</h4>
-            <ul class="phone-num" type="none">
-                <li><i class="fa fa-phone" aria-hidden="true"></i> Phone Number: +84..(The Liems)</li>
-            </ul>
-            <ul class="mail-address" type="none">
-                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> Email: theliems.support@eiu.edu.vn
-                </li>
-            </ul>
-            <ul class="address" type="none">
-                <li>
-                    <i class="fa fa-map" aria-hidden="true"></i><a href="https://maps.app.goo.gl/5MSLK73v9266wtg96"
-                        target="_blank"> Address: Thu Dau Mot - Binh
-                        Duong</a>
-                </li>
-                <li><i class="fa fa-university" aria-hidden="true"></i><a
-                        href="https://maps.app.goo.gl/usEamfmgeRZYH9u59" target="_blank"> Eastern International
-                        University</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</footer>
-
-<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 
 </html>
