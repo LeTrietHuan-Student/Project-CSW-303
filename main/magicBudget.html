@@ -24,7 +24,6 @@
             <h2>Dashboard</h2>
             <a href="LoginSite.html" class="btn" target="_blank">Get Started</a>
             <ul>
-                <!-- dung font awesome 4. -->
                 <li><a href="#"><i class="fa fa-line-chart" aria-hidden="true"></i> Analytics</a></li>
                 <li><a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i></i> Reports</a></li>
                 <li><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i></i> Settings</a></li>
@@ -32,7 +31,6 @@
             </ul>
         </div>
 
-        <!-- Overview -->
         <div class="main-content">
             <div class="stats">
                 <div class="stat-card">
@@ -51,10 +49,7 @@
                     <p class="balance-text">$13,400.71</p>
                 </div>
             </div>
-<<<<<<< Updated upstream
 
-=======
-            <!-- input -->
                 <button id="add-income-btn">Add Income</button>
                 <div id="income-modal" class="modal">
                     <div class="modal-content">
@@ -206,8 +201,6 @@
                         }
                     };
                 </script>
-            <!-- Circle table -->
->>>>>>> Stashed changes
             <div class="chart-placeholder">
                 <img src="images/expenseTable.png">
                 <div class="container">
@@ -436,7 +429,6 @@
                                 tooltip.style.display = 'block';
                                 tooltip.innerHTML = `<div>${d.date}</div><div>$${d.balance.toLocaleString()}</div>`;
                             });
-<<<<<<< Updated upstream
                             circle.addEventListener('mousemove', (event) => {
                                 tooltip.style.left = `${event.pageX + 10}px`;
                                 tooltip.style.top = `${event.pageY + 10}px`;
@@ -448,19 +440,14 @@
                             g.appendChild(circle);
                         });
                     </script>
-
-=======
-                        </script>
+              
 
                         
                     
->>>>>>> Stashed changes
                     <img src="images/balance.png">
                 </div>
             </div>
 
-<<<<<<< Updated upstream
-            <!-- Bar Chart -->
             <div class="barChart">
                 <div class="chart-placeholder">
                     <div class="chart-container">
@@ -542,17 +529,7 @@
                             .text("Expenses")
                             .style("font-size", "16px"); 
                     </script>
-=======
-            <!-- bar chart-->
-            <div class="lineChart">
-                <div class="chart-placeholder">
-                    <div class="chart-container">
-                        <svg width="600" height="300"></svg>
-                    </div>
-                    <img src="images/balance.png">
->>>>>>> Stashed changes
-                </div>
-            </div>
+           
         </div>
     </div>
     </div>
