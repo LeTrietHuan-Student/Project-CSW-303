@@ -8,15 +8,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="budget.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="js/reminder.js"></script>
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        }
+    </script>
+    
 </head>
 
 <body>
     <header>
         <div class="top-header">
             <i class="fa fa-bars hamburger" onclick="toggleSidebar()"></i>
-            <img src="images/logo.png" alt="Expense Tracker Logo">
-            <h1>Expense Tracker - Home page</h1>
+            <a href="magicBudget.html"><img src="images/logo.png" alt="Expense Tracker Logo"></a>
+            <h1>Expense Tracker</h1>
         </div>
     </header>
     <div class="mainLayout">
@@ -25,9 +31,9 @@
             <a href="LoginSite.html" class="btn" target="_blank">Get Started</a>
             <ul>
                 <li><a href="#"><i class="fa fa-line-chart" aria-hidden="true"></i> Analytics</a></li>
-                <li><a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i></i> Reports</a></li>
-                <li><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i></i> Settings</a></li>
-                <li><a href="#"><i class="fa fa-eye" aria-hidden="true"></i></i> Overview</a></li>
+                <li><a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> Reports</a></li>
+                <li><a href="setting.html"><i class="fa fa-cogs" aria-hidden="true"></i> Settings</a></li>
+                <li><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Overview</a></li>
             </ul>
         </div>
 
@@ -49,7 +55,10 @@
                     <p class="balance-text">$13,400.71</p>
                 </div>
             </div>
+<<<<<<< Updated upstream
 
+=======
+            <!-- input -->
                 <button id="add-income-btn">Add Income</button>
                 <div id="income-modal" class="modal">
                     <div class="modal-content">
@@ -201,6 +210,8 @@
                         }
                     };
                 </script>
+            <!-- Circle table -->
+>>>>>>> Stashed changes
             <div class="chart-placeholder">
                 <img src="images/expenseTable.png">
                 <div class="container">
@@ -221,8 +232,6 @@
                                 </td>
                             </tr>
                         </table>
-
-
                         <table id="expense-table">
                             <tr>
                                 <th>DANH MỤC</th>
@@ -231,83 +240,15 @@
                         </table>
                     </div>
                 </div>
-
-                <script>
-                    // Dữ liệu chi tiêu cho các tháng
-                    const expenseData = {
-                        "thang-nay": {
-                            total: "-3,017.76",
-                            categories: [
-                                { name: "Tiền thuê", amount: "-1,479.75", percentage: "49.03%", color: "#ff7f50" },
-                                { name: "Nhà cửa", amount: "-616.13", percentage: "20.42%", color: "#f4a460" },
-                                { name: "Ăn uống", amount: "-504.62", percentage: "16.72%", color: "#ff4040" },
-                                { name: "Mua sắm", amount: "-417.26", percentage: "13.83%", color: "#ffd700" }
-                            ]
-                        },
-                        "thang-truoc": {
-                            total: "-2,500.00",
-                            categories: [
-                                { name: "Tiền thuê", amount: "-1,200.00", percentage: "48.00%", color: "#ff7f50" },
-                                { name: "Nhà cửa", amount: "-500.00", percentage: "20.00%", color: "#f4a460" },
-                                { name: "Ăn uống", amount: "-400.00", percentage: "16.00%", color: "#ff4040" },
-                                { name: "Mua sắm", amount: "-400.00", percentage: "16.00%", color: "#ffd700" }
-                            ]
-                        }
-                    };
-
-                    // Hàm cập nhật biểu đồ và bảng
-                    function updateChart(month) {
-                        const data = expenseData[month];
-                        const chart = document.getElementById('chart');
-                        const totalExpense = document.getElementById('total-expense');
-                        const table = document.getElementById('expense-table');
-
-                        // Cập nhật tổng chi tiêu
-                        totalExpense.textContent = data.total;
-
-                        // Tạo gradient cho biểu đồ tròn
-                        let gradient = '';
-                        let accumulatedPercentage = 0;
-                        data.categories.forEach(category => {
-                            const percentage = parseFloat(category.percentage);
-                            gradient += `${category.color} ${accumulatedPercentage}% ${accumulatedPercentage + percentage}%`;
-                            accumulatedPercentage += percentage;
-                            if (category !== data.categories[data.categories.length - 1]) {
-                                gradient += ', ';
-                            }
-                        });
-                        chart.style.background = `conic-gradient(${gradient})`;
-
-                        // Cập nhật bảng
-                        table.innerHTML = `
-                            <tr>
-                                <th>DANH MỤC</th>
-                                <th>CHI TIÊU</th>
-                            </tr>
-                            ${data.categories.map(category => `
-                                <tr>
-                                    <td><span class="tag-color" style="background-color: ${category.color};"></span>${category.name}</td>
-                                    <td>${category.amount} (${category.percentage})</td>
-                                </tr>
-                            `).join('')}
-                            <tr>
-                                <td><strong>TỔNG</strong></td>
-                                <td><strong>${data.total} (100.00%)</strong></td>
-                            </tr>
-                        `;
-                    }
-
-                    // Khởi tạo với dữ liệu tháng này
-                    updateChart('thang-nay');
-                </script>
+                <script src="js/CircleChart.js"></script>
             </div>
 
-            <!-- </div> -->
+
+            <!-- line table-->
             <div class="lineChart">
                 <div class="chart-placeholder">
                     <!-- <div class="stat-card"> -->
                     <div class="chart-container">
-
                         <svg width="600" height="300"></svg>
                     </div>
 
@@ -429,6 +370,7 @@
                                 tooltip.style.display = 'block';
                                 tooltip.innerHTML = `<div>${d.date}</div><div>$${d.balance.toLocaleString()}</div>`;
                             });
+<<<<<<< Updated upstream
                             circle.addEventListener('mousemove', (event) => {
                                 tooltip.style.left = `${event.pageX + 10}px`;
                                 tooltip.style.top = `${event.pageY + 10}px`;
@@ -440,19 +382,48 @@
                             g.appendChild(circle);
                         });
                     </script>
-              
+
+=======
+                        </script>
 
                         
                     
+>>>>>>> Stashed changes
                     <img src="images/balance.png">
                 </div>
             </div>
 
+<<<<<<< Updated upstream
+            <!-- Bar Chart -->
             <div class="barChart">
+                
                 <div class="chart-placeholder">
+                    <h2>Daily Expenses for the Last 7 Days</h2>
                     <div class="chart-container">
-                        <h2>Daily Expenses for the Last 7 Days</h2>
-                        <svg width="800" height="400"></svg>
+                        <svg width="700" height="400"></svg>
+                    </div>
+                    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                    <script src="https://d3js.org/d3.v6.min.js"></script>
+                    <script src="js/barChart.js"></script>
+                </div>
+            </div>
+            <div class="budget-container">
+                <!-- Budget Item -->
+                <div class="budget-item">
+                    <img src="images/entertainment.png" alt="Entertainment Icon" />
+                    <div class="details">
+                        <div class="title">Entertainment</div>
+                        <div class="dates">
+                            <span>04/28/2025</span>
+                            <span>05/04/2025</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="fill" style="width: 0%">0%</div>
+                        </div>
+                        <div class="amounts">
+                            <span>$0.00</span>
+                            <span>$30.00</span>
+                        </div>
                     </div>
                     <script>
                         // Data for the bar chart (last 7 days expenses)
@@ -529,58 +500,70 @@
                             .text("Expenses")
                             .style("font-size", "16px"); 
                     </script>
-           
+=======
+            <!-- bar chart-->
+            <div class="lineChart">
+                <div class="chart-placeholder">
+                    <div class="chart-container">
+                        <svg width="600" height="300"></svg>
+                    </div>
+                    <img src="images/balance.png">
+>>>>>>> Stashed changes
+                </div>
+            </div>
         </div>
     </div>
     </div>
     </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="first-ele">
+                <img src="Design/logopng.png" alt="" style="width: 80px;">
+                <p>Easily track your expenses, manage your budget effectively, and make smarter financial decisions. Our
+                    expense tracker empowers you to take control of your personal finances, leading to greater peace of
+                    mind
+                    and financial freedom in the future.</p>
+                <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+            </div>
+
+            <div class="second-ele">
+                <h4>Usefull Links</h4>
+                <ul type="none">
+                    <li>About us</li>
+                    <li>Contact us</li>
+                    <li>Terms of Services</li>
+                    <li>Plan & Precing</li>
+                    <li>Site Map</li>
+                </ul>
+            </div>
+
+            <div class="third-ele">
+                <h4>Contact Us</h4>
+                <ul class="phone-num" type="none">
+                    <li><i class="fa fa-phone" aria-hidden="true"></i> Phone Number: +84..(LmaoLmao)</li>
+                </ul>
+                <ul class="mail-address" type="none">
+                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i> Email: <a href="/cdn-cgi/l/email-protection"
+                            class="__cf_email__"
+                            data-cfemail="d4e0fcf1f8fdf1f9e7bae7e1e4e4fbe6e0d4f1fde1baf1f0e1bae2fa">[email&#160;protected]</a>
+                    </li>
+                </ul>
+                <ul class="address" type="none">
+                    <li>
+                        <i class="fa fa-map" aria-hidden="true"></i><a href="https://maps.app.goo.gl/5MSLK73v9266wtg96"
+                            target="_blank"> Address: Thu Dau Mot - Binh
+                            Duong</a>
+                    </li>
+                    <li><i class="fa fa-university" aria-hidden="true"></i><a
+                            href="https://maps.app.goo.gl/usEamfmgeRZYH9u59" target="_blank"> Eastern International
+                            University</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
-<footer>
-    <div class="footer-container">
-        <div class="first-ele">
-            <img src="Design/logopng.png" alt="" style="width: 80px;">
-            <p>Easily track your expenses, manage your budget effectively, and make smarter financial decisions. Our
-                expense tracker empowers you to take control of your personal finances, leading to greater peace of mind
-                and financial freedom in the future.</p>
-            <i class="fa fa-facebook-official" aria-hidden="true"></i>
-            <i class="fa fa-instagram" aria-hidden="true"></i>
-        </div>
-
-        <div class="second-ele">
-            <h4>Usefull Links</h4>
-            <ul type="none">
-                <li>About us</li>
-                <li>Contact us</li>
-                <li>Terms of Services</li>
-                <li>Plan & Precing</li>
-                <li>Site Map</li>
-            </ul>
-        </div>
-
-        <div class="third-ele">
-            <h4>Contact Us</h4>
-            <ul class="phone-num" type="none">
-                <li><i class="fa fa-phone" aria-hidden="true"></i> Phone Number: +84..(The Liems)</li>
-            </ul>
-            <ul class="mail-address" type="none">
-                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> Email: theliems.support@eiu.edu.vn
-                </li>
-            </ul>
-            <ul class="address" type="none">
-                <li>
-                    <i class="fa fa-map" aria-hidden="true"></i><a href="https://maps.app.goo.gl/5MSLK73v9266wtg96"
-                        target="_blank"> Address: Thu Dau Mot - Binh
-                        Duong</a>
-                </li>
-                <li><i class="fa fa-university" aria-hidden="true"></i><a
-                        href="https://maps.app.goo.gl/usEamfmgeRZYH9u59" target="_blank"> Eastern International
-                        University</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</footer>
-
-<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 
 </html>

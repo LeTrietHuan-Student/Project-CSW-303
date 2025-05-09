@@ -1,6 +1,6 @@
-// main.js
-
-// Login Form Elements
+// file chinh
+/*
+// Phan tu dang nhap
 const loginForm = document.getElementById('loginForm');
 const usernameInput = document.getElementById('username');
 const passwordInput = document.getElementById('password');
@@ -8,7 +8,7 @@ const rememberCheckbox = document.getElementById('remember');
 const forgotPasswordLink = document.getElementById('forgotPassword');
 const registerLink = document.getElementById('registerLink');
 
-// Check if user is on magicBudget.html and not logged in
+// Kiem tra neu nguoi dung o magicBudget.html va chua dang nhap
 if (window.location.pathname.includes('magicBudget.html')) {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     if (!isLoggedIn) {
@@ -16,7 +16,7 @@ if (window.location.pathname.includes('magicBudget.html')) {
     }
 }
 
-// Handle Login Form Submission
+// Xu ly gui form dang nhap
 if (loginForm) {
     loginForm.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -24,14 +24,14 @@ if (loginForm) {
         const username = usernameInput.value.trim();
         const password = passwordInput.value.trim();
 
-        // Simple authentication (replace with backend API call in production)
+        // Xac thuc don gian (thay bang goi API backend trong san pham that)
         if (username === 'admin' && password === 'password123') {
-            alert('Đăng nhập thành công!');
+            alert('Dang nhap thanh cong!');
 
-            // Store login state
+            // Luu trang thai dang nhap
             localStorage.setItem('isLoggedIn', 'true');
 
-            //kiem tra da dang nhap chua
+            // Kiem tra da dang nhap chua
             if (rememberCheckbox.checked) {
                 localStorage.setItem('username', username);
                 localStorage.setItem('remember', 'true');
@@ -40,38 +40,38 @@ if (loginForm) {
                 localStorage.removeItem('remember');
             }
 
-            // Redirect to magicBudget.html
+            // Chuyen huong den magicBudget.html
             window.location.href = 'magicBudget.html';
         } else {
-            alert('Tên người dùng hoặc mật khẩu không đúng!');
+            alert('Ten nguoi dung hoac mat khau khong dung!');
         }
     });
 }
 
-// Handle Forgot Password
+// Xu ly quen mat khau
 if (forgotPasswordLink) {
     forgotPasswordLink.addEventListener('click', function(event) {
         event.preventDefault();
-        const email = prompt('Nhập email để khôi phục mật khẩu:');
+        const email = prompt('Nhap email de khoi phuc mat khau:');
         
         if (email) {
-            alert(`Link khôi phục mật khẩu đã được gửi đến ${email}`);
+            alert(`Link khoi phuc mat khau da duoc gui den ${email}`);
         } else {
-            alert('Vui lòng nhập email!');
+            alert('Vui long nhap email!');
         }
     });
 }
 
-// Handle Register Link
+// Xu ly lien ket dang ky
 if (registerLink) {
     registerLink.addEventListener('click', function(event) {
         event.preventDefault();
-        alert('Chuyển đến trang đăng ký!');
-        window.location.href = 'register.html'; // Ensure register.html exists or update the URL
+        alert('Chuyen den trang dang ky!');
+        window.location.href = 'register.html'; // Dam bao register.html ton tai hoac cap nhat URL
     });
 }
 
-// Load Remembered Username
+// Tai lai ten nguoi dung da luu
 if (usernameInput && rememberCheckbox) {
     window.onload = function() {
         if (localStorage.getItem('remember') === 'true') {
@@ -81,11 +81,20 @@ if (usernameInput && rememberCheckbox) {
     };
 }
 
-// Handle Logout (to be called from magicBudget.html)
+// Xu ly dang xuat (duoc goi tu magicBudget.html)
 function logout() {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('username');
     localStorage.removeItem('remember');
-    alert('Đã đăng xuất!');
+    alert('Da dang xuat!');
     window.location.href = 'LoginSite.html';
 }
+
+*/
+
+// Xu ly popup giao dich
+
+
+
+
+
