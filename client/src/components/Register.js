@@ -1,51 +1,100 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import axios from "axios";
+import "../styles/RegisterSite.css";
+import background from "../images/login_background.jpg";
+import logo from "../images/logo.png";
 
 function Register() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
     try {
-      await axios.post('http://localhost:5000/api/auth/register', {
+      await axios.post("http://localhost:500/api/auth/register", {
         email,
         password,
       });
-      navigate('/');
+      window.location.href = "/";
     } catch (err) {
-      setError('Registration failed');
+      setError(err.response?.data?.msg || "Registration failed");
     }
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Register</button>
-      </form>
-      <p>
-        Already have an account? <a href="/">Login</a>
-      </p>
-    </div>
+    <>
+      {/* Metadata and Styles */}
+      <link rel="shortcut icon" href="Design/logopng.png" type="image/x-icon" />
+      <title>Register Form</title>
+      <link
+        href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+        rel="stylesheet"
+      />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+        rel="stylesheet"
+      />
+      <div className="login-page">
+        <div className="background"><img src={background}></img></div>
+        <div className="cover"></div>
+        <div className="logo"><img src={logo}></img></div>
+        
+        <div className="wrapper">
+          <form id="registerForm" onSubmit={handleSubmit}>
+            <h1>Register</h1>
+            {error && <p className="error-message">{error}</p>} {/* Hiển thị lỗi */}
+            <div className="input_box">
+              <input
+                type="email"
+                placeholder="Email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)} // Cập nhật email
+                required
+              />
+              <i className="bx bx-envelope"></i>
+            </div>
+            <div className="input_box">
+              <input
+                type="password"
+                placeholder="Password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} // Cập nhật password
+                required
+              />
+              <i className="bx bx-lock"></i>
+            </div>
+            <div className="input_box">
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)} // Cập nhật confirm password
+                required
+              />
+              <i className="bx bx-check-circle"></i>
+            </div>
+            <button type="submit" className="btn">
+              Register
+            </button>
+            <div className="register_link">
+              Already have an account?{" "}
+              <a href="/" id="loginLink">
+                Login
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
   );
 }
 

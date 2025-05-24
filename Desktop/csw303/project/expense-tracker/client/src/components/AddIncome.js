@@ -17,6 +17,20 @@ import {
 } from 'react-icons/fa';
 
 function AddIncome() {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+  const dd = String(today.getDate()).padStart(2, '0');
+
+  // Định dạng thành 'YYYY-MM-DD'
+  const formattedDate = `${yyyy}-${mm}-${dd}`;
+
+  const hh = String(today.getHours()).padStart(2, '0'); // Giờ
+  const m = String(today.getMinutes()).padStart(2, '0'); // Phút
+
+  // Định dạng thành 'HH:MM'
+  const formattedTime = `${hh}:${m}`;
+
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -73,8 +87,8 @@ function AddIncome() {
       // Reset form
       e.target.reset();
       e.target.checked.checked = true; // Reset checked to default
-      e.target.date.value = '2025-04-28'; // Reset date to default
-      e.target.time.value = '21:31'; // Reset time to default
+      e.target.date.value = formattedDate; // Reset date to default
+      e.target.time.value = formattedTime; // Reset time to default
 
       // Nếu không phải "Save +", đóng modal
       if (!isSaveAdd) {
@@ -156,13 +170,13 @@ function AddIncome() {
               <label htmlFor="date">
                 <FaCalendar /> Date
               </label>
-              <input type="date" id="date" name="date" defaultValue="2025-04-28" required />
+              <input type="date" id="date" name="date" defaultValue={formattedDate} required />
             </div>
             <div className="form-group">
               <label htmlFor="time">
                 <FaClock /> Time
               </label>
-              <input type="time" id="time" name="time" defaultValue="21:31" required />
+              <input type="time" id="time" name="time" defaultValue={formattedTime} required />
             </div>
             <div className="form-group">
               <label htmlFor="from">

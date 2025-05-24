@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import expenseTable from '../images/expenseTable.png';
-import { getExpenseData, getAvailableMonths } from '../javascripts/circleData';
+import { fetchExpenseData } from '../javascripts/circleData';
+
+
+
 
 function CircleChart() {
-  const [currentMonth, setCurrentMonth] = useState('thang-nay');
-  const data = getExpenseData(currentMonth);
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
+  const [data, setData] = useState({ total: '0', categories: [] });
 
-  // Generate conic gradient for the pie chart
+  useEffect(() => {
+    const loadData = async () => {
+      const result = await fetchExpenseData(currentMonth);
+      setData(result);
+    };
+
+    loadData();
+  }, [currentMonth]);
+
   const generateGradient = () => {
     let gradient = '';
     let accumulatedPercentage = 0;
@@ -25,50 +36,41 @@ function CircleChart() {
     <div className="chart-placeholder">
       <img src={expenseTable} alt="Expense Table" />
       <div className="container">
-        {/* Pie Chart */}
         <div className="chart" id="chart" style={{ background: generateGradient() }}>
           <div className="total" id="total-expense">
             {data.total}
           </div>
         </div>
         <div className="stat-card">
-          {/* Title and Month Selector */}
           <table id="expense-table-title">
             <tbody>
               <tr>
                 <td>
-                  <h2>CHI TIÊU</h2>
+                  <h2>EXPENSES</h2>
                 </td>
                 <td>
                   <select
                     className="month-selector"
                     value={currentMonth}
-                    onChange={(e) => setCurrentMonth(e.target.value)}
+                    onChange={(e) => setCurrentMonth(parseInt(e.target.value, 10))}
                   >
-                    {getAvailableMonths().map((month) => (
-                      <option key={month} value={month}>
-                        {month === 'thang-nay' ? 'Tháng Này' : 'Tháng Trước'}
-                      </option>
-                    ))}
+                    <option value={new Date().getMonth() + 1}>This month</option>
+                    <option value={new Date().getMonth()}>Last month</option>
                   </select>
                 </td>
               </tr>
             </tbody>
           </table>
-          {/* Expense Table */}
           <table id="expense-table">
             <tbody>
               <tr>
-                <th>DANH MỤC</th>
-                <th>CHI TIÊU</th>
+                <th>CATEGORIES</th>
+                <th>EXPENSES</th>
               </tr>
               {data.categories.map((category, index) => (
                 <tr key={index}>
                   <td>
-                    <span
-                      className="tag-color"
-                      style={{ backgroundColor: category.color }}
-                    ></span>
+                    <span className="tag-color" style={{ backgroundColor: category.color }}></span>
                     {category.name}
                   </td>
                   <td>
@@ -77,8 +79,8 @@ function CircleChart() {
                 </tr>
               ))}
               <tr>
-                <td><strong>TỔNG</strong></td>
-                <td><strong>{data.total} (100.00%)</strong></td>
+                <td><strong>TOTAL</strong></td>
+                <td><strong>{data.total}</strong></td>
               </tr>
             </tbody>
           </table>
