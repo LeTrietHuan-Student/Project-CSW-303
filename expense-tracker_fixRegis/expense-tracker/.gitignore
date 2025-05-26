@@ -1,0 +1,3 @@
+Root ignore
+
+node_modules/ .env

@@ -1,0 +1,1 @@
+npm run dev để chạy cả 2 server
