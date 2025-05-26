@@ -25,7 +25,7 @@ if (loginForm) {
     const password = passwordInput.value.trim();
 
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
+      const response = await fetch('http://localhost:500/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -77,7 +77,7 @@ if (registerLink) {
 
     if (username && email && password) {
       try {
-        const response = await fetch('http://localhost:5000/api/register', {
+        const response = await fetch('http://localhost:500/api/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, email, password }),
@@ -121,7 +121,7 @@ function logout() {
 async function fetchExpenses() {
   const token = localStorage.getItem('token');
   try {
-    const response = await fetch('http://localhost:5000/api/expenses', {
+    const response = await fetch('http://localhost:500/api/expenses', {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -183,8 +183,8 @@ async function addOrUpdateExpense(formData, expenseId = null) {
   const token = localStorage.getItem('token');
   const method = expenseId ? 'PUT' : 'POST';
   const url = expenseId
-    ? `http://localhost:5000/api/expenses/${expenseId}`
-    : 'http://localhost:5000/api/expenses';
+    ? `http://localhost:500/api/expenses/${expenseId}`
+    : 'http://localhost:500/api/expenses';
 
   try {
     const response = await fetch(url, {
@@ -213,7 +213,7 @@ async function addOrUpdateExpense(formData, expenseId = null) {
 async function deleteExpense(expenseId) {
   const token = localStorage.getItem('token');
   try {
-    const response = await fetch(`http://localhost:5000/api/expenses/${expenseId}`, {
+    const response = await fetch(`http://localhost:500/api/expenses/${expenseId}`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -234,7 +234,7 @@ async function deleteExpense(expenseId) {
 async function editExpense(expenseId) {
   const token = localStorage.getItem('token');
   try {
-    const response = await fetch(`http://localhost:5000/api/expenses`, {
+    const response = await fetch(`http://localhost:500/api/expenses`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     });

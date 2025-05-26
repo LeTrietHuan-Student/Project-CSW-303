@@ -1,75 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import ExpenseForm from './AddExpense';
+// import React, { useState, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+// import ExpenseForm from './AddExpense';
+
+import React, { useState } from 'react';
+import '../styles/budget.css';
+import Header from './Header';
+import Sidebar from './Sidebar';
+import Stats from './Stats';
+import IncomeModal from './IncomeModal';
+import CircleChart from './CircleChart';
+import LineChart from './LineChart';
+import BarChart from './BarChart';
+import BudgetContainer from './BudgetContainer';
+import Transactions from './Transactions';
+import Reminders from './Reminders';
+import Footer from './Footer';
 
 function Dashboard() {
-    const [expenses, setExpenses] = useState([]);
-    const navigate = useNavigate();
+  const [isSidebarActive, setIsSidebarActive] = useState(false);
 
-    useEffect(() => {
-        const fetchExpenses = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const response = await axios.get('http://localhost:5000/api/expenses', {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
-                setExpenses(response.data);
-            } catch (err) {
-                navigate('/');
-            }
-        };
-        fetchExpenses();
-    }, [navigate]);
+  const toggleSidebar = () => {
+    setIsSidebarActive(!isSidebarActive);
+  };
 
-    const handleAddExpense = (newExpense) => {
-        setExpenses([...expenses, newExpense]);
-    };
-
-    const handleDelete = async (id) => {
-        try {
-            const token = localStorage.getItem('token');
-            await axios.delete(`http://localhost:5000/api/expenses/${id}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            setExpenses(expenses.filter(expense => expense.id !== id));
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
-    return (
-        <div className="min-h-screen bg-gray-100 p-6">
-            <div className="max-w-4xl mx-auto">
-                <h1 className="text-3xl font-bold mb-6 text-center">Expense Tracker</h1>
-                <ExpenseForm onAddExpense={handleAddExpense} />
-                <div className="mt-6">
-                    <h2 className="text-xl font-semibold mb-4">Expenses</h2>
-                    {expenses.length === 0 ? (
-                        <p>No expenses yet.</p>
-                    ) : (
-                        <ul className="space-y-4">
-                            {expenses.map(expense => (
-                                <li key={expense.id} className="bg-white p-4 rounded shadow flex justify-between">
-                                    <div>
-                                        <p><strong>Amount:</strong> ${expense.amount}</p>
-                                        <p><strong>Description:</strong> {expense.description}</p>
-                                        <p><strong>Date:</strong> {new Date(expense.date).toLocaleDateString()}</p>
-                                    </div>
-                                    <button
-                                        onClick={() => handleDelete(expense.id)}
-                                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                                    >
-                                        Delete
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
-            </div>
+  return (
+    <div>
+      <Header toggleSidebar={toggleSidebar} />
+      <div className="mainLayout">
+        <Sidebar isActive={isSidebarActive} />
+        <div className="main-content">
+          <Stats />
+          <IncomeModal />
+          <CircleChart />
+          <LineChart />
+          <BarChart />
+          <BudgetContainer />
+          <Transactions />
+          <Reminders />
         </div>
-    );
+      </div>
+      <Footer />
+    </div>
+  );
 }
 
 export default Dashboard;
+
+
