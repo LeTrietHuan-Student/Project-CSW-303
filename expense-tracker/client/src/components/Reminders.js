@@ -90,10 +90,10 @@ function Reminders() {
         id="reminders-section"
         style={{
           position: "fixed",
-          top: "80px",
+          top: "40px",
           right: isPanelOpen ? "0" : "-250px",
           width: "250px",
-          height: "calc(100vh - 60px)",
+          height: "calc(100vh - 20px)",
           backgroundColor: "#fff",
           boxShadow: "-2px 0 5px rgba(0,0,0,0.2)",
           transition: "right 0.3s ease",

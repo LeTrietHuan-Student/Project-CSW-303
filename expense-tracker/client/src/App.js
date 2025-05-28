@@ -3,6 +3,10 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import AddExpense from './components/AddExpense';
+import ForgotPassword from './components/ForgotPassword';
+import Entercode from './components/EnterCode';
+import ResetPass from './components/ResetPassword';
+
 // import Analytics from './components/Analytics'; 
 import Reports from './components/Report'; 
 // import Settings from './components/Settings'; 
@@ -15,6 +19,9 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/resetPass" element={<ResetPass />} />
+          <Route path="/enterCode" element={<Entercode />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/addexpense" element={<AddExpense />} />

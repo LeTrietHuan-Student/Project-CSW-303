@@ -3,7 +3,7 @@ import axios from 'axios';
 // Lấy dữ liệu chi phí từ API
 export const fetchExpenseData = async (currentMonth) => {
   const categories = {
-    shopping: 0,
+    food: 0,
     transport: 0,
     entertainment: 0,
     eating: 0,
@@ -38,7 +38,7 @@ export const fetchExpenseData = async (currentMonth) => {
     return {
       total: `-${total.toFixed(2)}`,
       categories: Object.entries(categories).map(([name, amount]) => ({
-        name,
+        name: name === "food" ? "shopping" : name,
         amount: `-${amount.toFixed(2)}`,
         percentage: ((amount / Math.max(1, total)) * 100).toFixed(2) + '%',
         color: getColorForCategory(name),
@@ -53,7 +53,7 @@ export const fetchExpenseData = async (currentMonth) => {
 // Gán màu sắc cho từng danh mục
 const getColorForCategory = (category) => {
   const colors = {
-    shopping: '#f4a460',
+    food: '#f4a460',
     transport: '#ffd700',
     entertainment: '#ff7f50',
     eating: '#ff4040',
