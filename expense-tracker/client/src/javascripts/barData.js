@@ -31,7 +31,7 @@ export async function fetchBarChartData() {
 
   try {
     const res = await axios.post(
-      "http://localhost:500/api/auth/expenseData",
+      "http://localhost:500/api/auth/expensesData",
       {},
       {
         headers: { Authorization: `Bearer ${token}` },
