@@ -4,9 +4,11 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
 }
-ul{
+
+ul {
     list-style-type: none;
 }
+
 body {
     background-color: #f5f7fa;
 }
@@ -16,6 +18,7 @@ header {
     top: 0;
     z-index: 1000;
 }
+
 .hamburger {
     display: none;
     color: white;
@@ -74,7 +77,7 @@ header {
     color: rgb(33, 150, 243);
 }
 
-/* Sidebar */  
+/* Sidebar */
 .sidebar {
     width: 250px;
     height: 100%;
@@ -282,7 +285,7 @@ th {
     z-index: 1;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
@@ -336,7 +339,8 @@ th {
     cursor: pointer;
     font-size: 18px;
 }
- /* form gi do  */
+
+/* form gi do  */
 .form-group {
     display: flex;
     align-items: center;
@@ -367,114 +371,119 @@ th {
     margin-left: 10px;
     font-weight: bold;
 }
- /* toggle cho dashboard */
+
+/* toggle cho dashboard */
 /* General toggle container for expense */
 .expense-toggle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 /* Hide the checkbox input */
 .expense-toggle input {
-  display: none;
+    display: none;
 }
 
 /* Base toggle label style */
 .expense-toggle-label {
-  position: relative;
-  display: inline-block;
-  width: 44px; /* Slightly larger than income toggle for distinction */
-  height: 22px;
-  background-color: #ccc;
-  border-radius: 11px;
-  cursor: pointer;
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    /* Slightly larger than income toggle for distinction */
+    height: 22px;
+    background-color: #ccc;
+    border-radius: 11px;
+    cursor: pointer;
 }
 
 /* Specific styles for checked and refund toggles */
 .expense-toggle-label.expense-checked-toggle,
 .expense-toggle-label.expense-refund-toggle {
-  width: 44px;
+    width: 44px;
 }
 
 /* Toggle knob */
 .expense-toggle-label::after {
-  content: '';
-  position: absolute;
-  width: 18px; /* Slightly larger knob */
-  height: 18px;
-  background-color: #fff;
-  border-radius: 50%;
-  top: 2px;
-  left: 2px;
-  transition: 0.3s;
+    content: '';
+    position: absolute;
+    width: 18px;
+    /* Slightly larger knob */
+    height: 18px;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: 0.3s;
 }
 
 /* Active state for checked toggle */
-.expense-toggle input:checked + .expense-toggle-label {
-  background-color: #E55D87; /* Pinkish color to match expense theme */
+.expense-toggle input:checked+.expense-toggle-label {
+    background-color: #E55D87;
+    /* Pinkish color to match expense theme */
 }
 
 /* Move knob when checked */
-.expense-toggle input:checked + .expense-toggle-label::after {
-  left: 24px; /* Adjusted for larger toggle width */
+.expense-toggle input:checked+.expense-toggle-label::after {
+    left: 24px;
+    /* Adjusted for larger toggle width */
 }
 
 /* Ensure consistency for specific toggles */
-.expense-toggle input:checked + .expense-toggle-label.expense-checked-toggle::after,
-.expense-toggle input:checked + .expense-toggle-label.expense-refund-toggle::after {
-  left: 24px;
+.expense-toggle input:checked+.expense-toggle-label.expense-checked-toggle::after,
+.expense-toggle input:checked+.expense-toggle-label.expense-refund-toggle::after {
+    left: 24px;
 }
 
 /* Existing income toggle styles (unchanged) */
 .toggle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .toggle input {
-  display: none;
+    display: none;
 }
 
 .toggle-label {
-  position: relative;
-  display: inline-block;
-  width: 40px;
-  height: 20px;
-  background-color: #ccc;
-  border-radius: 10px;
-  cursor: pointer;
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .toggle-label.checked-toggle,
 .toggle-label.refund-toggle {
-  width: 40px;
+    width: 40px;
 }
 
 .toggle-label::after {
-  content: '';
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  background-color: #fff;
-  border-radius: 50%;
-  top: 2px;
-  left: 2px;
-  transition: 0.3s;
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: 0.3s;
 }
 
-.toggle input:checked + .toggle-label {
-  background-color: rgb(76, 175, 80)
+.toggle input:checked+.toggle-label {
+    background-color: rgb(76, 175, 80)
 }
 
-.toggle input:checked + .toggle-label::after {
-  left: 22px;
+.toggle input:checked+.toggle-label::after {
+    left: 22px;
 }
 
-.toggle input:checked + .toggle-label.checked-toggle::after,
-.toggle input:checked + .toggle-label.refund-toggle::after {
-  left: 22px;
+.toggle input:checked+.toggle-label.checked-toggle::after,
+.toggle input:checked+.toggle-label.refund-toggle::after {
+    left: 22px;
 }
 
 .photo-link {
@@ -509,6 +518,7 @@ th {
     background-color: #4CAF50;
     color: #fff;
 }
+
 /* income */
 #add-income-btn {
     padding: 10px 15px;
@@ -570,7 +580,7 @@ th {
     background-color: #fff;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 730px;
-    
+
     /* Đặt chiều rộng linh hoạt */
     max-width: 710px;
     overflow: hidden;
@@ -601,29 +611,33 @@ th {
 }
 
 /* bảng cột */
-.barChart > .chart-placeholder > h2{
+.barChart>.chart-placeholder>h2 {
     width: 100%;
     text-align: center;
 }
-.barChart > .chart-placeholder {
+
+.barChart>.chart-placeholder {
     margin-top: 30px;
-    background-color: rgb(240, 248, 255); /* Nền nhẹ */
+    background-color: rgb(240, 248, 255);
+    /* Nền nhẹ */
     /* padding: 20px; */
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Tạo chiều sâu */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Tạo chiều sâu */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .barChart .chart-container {
     position: relative;
     text-align: center;
-    width: 900px;
-    max-width: 910px;
+    width: 1000px;
+    max-width: 1000px;
     margin: 0 auto;
     height: auto;
     overflow-x: hidden;
-    /* overflow-x: auto; */
+    flex: 1;
 }
+
 .chart-tooltip {
     position: absolute;
     background-color: white;
@@ -634,6 +648,7 @@ th {
     pointer-events: none;
     display: none;
 }
+
 .barChart h2 {
     font-size: 1.8em;
     margin-bottom: 15px;
@@ -645,7 +660,55 @@ th {
 
 .barChart rect {
     transition: fill 0.2s ease, transform 0.2s ease;
-    cursor: pointer; /* Hiển thị trạng thái tương tác */
+    cursor: pointer;
+}
+
+.bar {
+    fill: rgb(52, 120, 175);
+}
+
+.parent {
+    display: flex;
+    flex-direction: row;
+    width: 1000px;
+    /* Fixed width for the layout */
+    margin: 0 auto;
+    /* Center the container */
+}
+
+.barChart.axis-x text {
+    font-size: 12px;
+    text-anchor: middle;
+}
+
+.chart-container svg {
+    width: 100%;
+    height: 600px;
+    background-color: #99c1ee;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* Evenly space buttons */
+    padding-left: 10px;
+    /* Space between chart and buttons */
+    width: 150px;
+    /* Fixed width for button column */
+}
+
+button {
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
 }
 
 /* bieu do 6 ele */
@@ -721,6 +784,7 @@ th {
 .detail-content p {
     margin: 5px 0;
 }
+
 /* nut kiem tra */
 .check-button {
     background-color: #ff6666;
@@ -737,6 +801,7 @@ th {
 .check-button:hover {
     background-color: #ff3333;
 }
+
 /* //bieu do 9 */
 .budget-container {
     width: 100%;
@@ -754,7 +819,8 @@ th {
 .budget-item {
     display: flex;
     gap: 12px;
-    margin-bottom: 0; /* Loai bo margin-bottom vi da dung gap */
+    margin-bottom: 0;
+    /* Loai bo margin-bottom vi da dung gap */
 }
 
 .budget-item img {
@@ -799,6 +865,7 @@ th {
     font-size: 12px;
     color: #333;
 }
+
 /* bieu do 10 */
 /* cai ban ghi chu */
 .reminders-section {
@@ -873,6 +940,7 @@ th {
     cursor: pointer;
     z-index: 98;
 }
+
 /* admin */
 .admin-section {
     margin-top: 2rem;
@@ -972,17 +1040,19 @@ footer li {
 }
 
 /* report */
-.report label{
+.report label {
     color: #007bff;
     margin-right: 10px;
 }
-.report .select{
+
+.report .select {
     border-radius: 15px;
     margin-right: 0;
     border: 2px solid green;
     width: 150px;
 }
-.report h2{
+
+.report h2 {
     background-color: rgb(231, 236, 255);
     color: #00b0dd;
     border-bottom: 5px solid rgb(233, 235, 242);
@@ -990,120 +1060,123 @@ footer li {
     border-radius: 10px;
     margin-bottom: 30px;
 }
+
 .report .table-container {
-  background: white;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  max-width: 100%;
-  margin: 0 auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 .report .tabs {
-  display: flex;
-  margin-bottom: 20px;
+    display: flex;
+    margin-bottom: 20px;
 }
 
 .report .tab {
-  padding: 10px 20px;
-  cursor: pointer;
-  color: #666;
-  font-size: 1rem;
-  position: relative;
-  transition: color 0.3s ease;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #666;
+    font-size: 1rem;
+    position: relative;
+    transition: color 0.3s ease;
 }
 
 .report .tab.active {
-  color: #007bff;
-  font-weight: bold;
+    color: #007bff;
+    font-weight: bold;
 }
 
 .report .tab.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #007bff;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #007bff;
 }
 
 .report .tab-content {
-  display: none;
+    display: none;
 }
 
 .report .tab-content.active {
-  display: block;
+    display: block;
 }
 
 .report table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
 .report th {
-  background-color: #4caf50;
-  color: white;
-  border: 1px solid #4caf50;
-  padding: 10px;
-  text-align: left;
+    background-color: #4caf50;
+    color: white;
+    border: 1px solid #4caf50;
+    padding: 10px;
+    text-align: left;
 }
 
 .report td {
-  color: #333;
-  border: 1px solid #ccc;
-  padding: 8px;
-  height: 48px;
-  vertical-align: middle;
-  box-sizing: border-box;
-  overflow: hidden;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 8px;
+    height: 48px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .report tr:nth-child(even) {
-  background-color: #f9f9f9;
+    background-color: #f9f9f9;
 }
 
 .report tr:nth-child(odd) {
-  background-color: #fff;
+    background-color: #fff;
 }
 
 .report tr:hover {
-  background-color: #eee;
+    background-color: #eee;
 }
 
 .report td input,
 .report td select {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  padding: 6px 8px;
-  font-size: 1rem;
-  font-family: inherit;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: white;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 6px 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
 }
 
 .report .edit-btn,
 .report .save-btn,
 .report .cancel-btn,
 .report .delete-btn {
-  cursor: pointer;
-  font-size: 1rem;
-  margin: 0 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 0 5px;
 }
 
 .report .edit-btn {
-  color: black;
-  margin-right: 30px;
-  margin-left: 20px;
+    color: black;
+    margin-right: 30px;
+    margin-left: 20px;
 }
-.report .edit-btn:hover{
+
+.report .edit-btn:hover {
     color: #00b0dd;
 }
-.report .delete-btn:hover{
-    color:#E55D87;
+
+.report .delete-btn:hover {
+    color: #E55D87;
 }
 
 .report .save-btn {
@@ -1112,6 +1185,7 @@ footer li {
     background-color: transparent;
     color: green;
 }
+
 .report .save-btn:hover {
     color: rgb(0, 214, 0);
 }
@@ -1120,43 +1194,44 @@ footer li {
     background-color: transparent;
     color: #E55D87;
 }
+
 .report .cancel-btn:hover {
     color: red;
 }
 
 .report tr.editing {
-  background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
 
 .report #add-btn {
-  margin-bottom: 10px;
-  padding: 8px 16px;
-  background-color: #4caf50;
-  border: none;
-  color: white;
-  font-size: 1rem;
-  border-radius: 4px;
-  cursor: pointer;
+    margin-bottom: 10px;
+    padding: 8px 16px;
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .report #add-btn:hover {
-  background-color: #45a049;
+    background-color: #45a049;
 }
 
 .report .mainLayout {
-  display: flex;
+    display: flex;
 }
 
 .report .main-content {
-  flex: 1;
-  padding: 20px;
+    flex: 1;
+    padding: 20px;
 }
 
 .report select {
-  padding: 6px;
-  margin: 0 5px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+    padding: 6px;
+    margin: 0 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
 
@@ -1187,6 +1262,7 @@ footer li {
         top: 100px;
         border-radius: 10px;
     }
+
     .reminders-section {
         position: fixed;
         right: -250px;
@@ -1200,6 +1276,7 @@ footer li {
         z-index: 97;
         padding: 15px;
     }
+
     /* Responsive design for reminders */
     .reminders-section {
         width: 200px;
@@ -1216,7 +1293,7 @@ footer li {
         padding: 6px 12px;
     }
 
-    
+
     /* media cho phan transaction */
     .transactions-section {
         padding: 15px;
@@ -1241,14 +1318,17 @@ footer li {
     .popup-button {
         padding: 4px 8px;
     }
+
     .chart-container {
-        margin: 0; /* Loại bỏ căn giữa để phù hợp với thanh trượt */
+        margin: 0;
+        /* Loại bỏ căn giữa để phù hợp với thanh trượt */
     }
+
     .footer-container {
         margin-left: 0;
     }
-    
-    
+
+
 }
 
 /* media cho phan sidebar(sidebar la gi ko ro:))) ) */
@@ -1284,40 +1364,53 @@ footer li {
     .footer-container {
         margin-left: 0;
     }
-    .report .cancel-btn{
+
+    .report .cancel-btn {
         margin-top: 10px;
         margin-left: 20px;
     }
-    .report .delete-btn{
+
+    .report .delete-btn {
         margin-top: 10px;
         margin-left: 20px;
     }
-    .report .choose{
+
+    .report .choose {
         display: none;
     }
 }
+
 /* cho slider barChart */
-@media (max-width: 1222px) { /* 910px + 20px padding + some buffer */
+@media (max-width: 1222px) {
+
+    /* 910px + 20px padding + some buffer */
     .barChart .chart-container {
-        overflow-x: auto; /* Allow horizontal scrolling */
-        white-space: nowrap; /* Prevent SVG wrapping */
+        overflow-x: auto;
+        /* Allow horizontal scrolling */
+        white-space: nowrap;
+        /* Prevent SVG wrapping */
     }
 }
+
 /*  media cho man hinh desktop 1200 tro len */
 @media (min-width: 1200px) {
     .main-content {
         padding: 40px;
-        padding-left: 300px;/*dieu chinh cho thanh ben rong hon */
+        padding-left: 300px;
+        /*dieu chinh cho thanh ben rong hon */
         width: 100%;
-        max-width: none;/*loai bo gioi han */
+        max-width: none;
+        /*loai bo gioi han */
     }
 
     .sidebar {
-        width: 280px;/*thanh ben  rong hon cho man hinh XL */
+        width: 280px;
+        /*thanh ben  rong hon cho man hinh XL */
     }
 
     .stats {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /*coie thong ke lon hon*/
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        /*coie thong ke lon hon*/
         gap: 30px;
     }
 
@@ -1335,28 +1428,36 @@ footer li {
     }
 
     .barChart .chart-container {
-        max-width: 1200px; /*mo rong bieu do cot */
+        max-width: 1200px;
+        /*mo rong bieu do cot */
     }
 
     .lineChart .chart-container {
-        max-width: 1000px; /**mo rong bieu do duong*/
+        max-width: 1000px;
+        /**mo rong bieu do duong*/
     }
 
     .footer-container {
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /**/
-        margin-left: 280px; /*cho khop do rong cai thanh ben gi*/
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        /**/
+        margin-left: 280px;
+        /*cho khop do rong cai thanh ben gi*/
     }
 }
+
 .modal {
-  display: none;
+    display: none;
 }
+
 .modal.open {
-  display: block;
+    display: block;
 }
+
 .modal-content {
-  background: white;
-  padding: 20px;
+    background: white;
+    padding: 20px;
 }
+
 .error {
-  color: red;
+    color: red;
 }

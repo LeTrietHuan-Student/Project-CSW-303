@@ -1,9 +1,8 @@
-// src/components/BarChart.jsx
-import React, { useState, useRef, useEffect } from "react";
-import * as d3 from "d3";
+// src/components/BarChart.js
+
+import React, { useState, useEffect, useRef } from "react";
 import {
-  getBarChartData,
-  addDataPoint,
+  fetchBarChartData,
   xScale,
   yScale,
   width,
@@ -14,148 +13,177 @@ import {
 } from "../javascripts/barData";
 
 function BarChart() {
-  const [data, setData] = useState(getBarChartData());
-  const [newPoint, setNewPoint] = useState({ date: "", expense: "", color: "#ff4040" });
-  const svgRef = useRef(null);
-  const tooltipRef = useRef(null);
+  const [data, setData] = useState([]);           // holds [{ date, expense }, …]
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Initialize tooltip div
+  // Tooltip state
+  const [tooltip, setTooltip] = useState({
+    visible: false,
+    x: 0,
+    y: 0,
+    content: "",
+  });
+  const containerRef = useRef(null);
+
+  // Fetch data once on mount
   useEffect(() => {
-    if (!tooltipRef.current) {
-      const tooltip = document.createElement("div");
-      tooltip.className = "chart-tooltip";
-      tooltip.style.position = "absolute";
-      tooltip.style.backgroundColor = "white";
-      tooltip.style.border = "1px solid #ccc";
-      tooltip.style.borderRadius = "5px";
-      tooltip.style.padding = "5px";
-      tooltip.style.boxShadow = "0 0 5px rgba(0,0,0,0.2)";
-      tooltip.style.pointerEvents = "none";
-      tooltip.style.display = "none";
-      tooltip.style.zIndex = "1000";
-      document.body.appendChild(tooltip);
-      tooltipRef.current = tooltip;
-    }
-
-    // Cleanup on unmount
-    return () => {
-      if (tooltipRef.current) {
-        document.body.removeChild(tooltipRef.current);
-        tooltipRef.current = null;
-      }
-    };
+    fetchBarChartData()
+      .then((arr) => {
+        setData(arr);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message || "Unknown error");
+        setLoading(false);
+      });
   }, []);
 
-  // Update data when external changes occur
-  useEffect(() => {
-    setData(getBarChartData());
-  }, []);
+  // Prepare an array of all expense values for yScale
+  const allValues = data.map((d) => d.expense);
 
-  // Render axes
-  useEffect(() => {
-    const svg = d3.select(svgRef.current);
-    svg.selectAll(".axis").remove(); // Clear previous axes
+  // Compute Y‐axis tick values (7 ticks from 0 to max)
+  const yTicks = (() => {
+    if (allValues.length === 0) return [];
+    const maxVal = Math.max(...allValues);
+    const numTicks = 7;
+    const step = maxVal / (numTicks - 1 || 1);
 
-    const g = svg
-      .attr("width", width)
-      .attr("height", height)
-      .append("g")
-      .attr("class", "axis")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
+    // Round each tick to nearest thousand, then dedupe & sort
+    const raw = Array.from({ length: numTicks }, (_, i) => i * step);
+    const rounded = raw.map((v) => Math.round(v / 1000) * 1000);
+    return Array.from(new Set(rounded)).sort((a, b) => a - b);
+  })();
 
-    // X-axis
-    g.append("g")
-      .attr("transform", `translate(0,${chartHeight})`)
-      .call(d3.axisBottom(xScale(data)))
-      .selectAll("text")
-      .style("font-size", "14px")
-      .attr("transform", "rotate(-45)")
-      .attr("text-anchor", "end");
-
-    // Y-axis
-    g.append("g")
-      .call(d3.axisLeft(yScale(data)).tickFormat((d) => `$${d}`))
-      .selectAll("text")
-      .style("font-size", "14px");
-  }, [data]);
-
-  // Handle form input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewPoint((prev) => ({ ...prev, [name]: value }));
-  };
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (newPoint.date && newPoint.expense) {
-      const expense = parseFloat(newPoint.expense);
-      if (!isNaN(expense) && expense >= 0) {
-        addDataPoint({
-          date: newPoint.date,
-          expense,
-          color: newPoint.color,
-        });
-        setData([...getBarChartData()]); // Trigger re-render
-        setNewPoint({ date: "", expense: "", color: "#ff4040" }); // Reset form
-      }
-    }
-  };
-
-  // Handle mouse events for bars
+  // Tooltip handlers
   const handleMouseOver = (d, event) => {
-    // console.log("Mouse over:", d, event.pageX, event.pageY); 
-    if (tooltipRef.current) {
-      tooltipRef.current.style.display = "block";
-      tooltipRef.current.innerHTML = `<div>${d.date}</div><div>Expense: $${d.expense}</div>`;
-      tooltipRef.current.style.left = `${event.pageX + 10}px`;
-      tooltipRef.current.style.top = `${event.pageY + 10}px`;
-    }
-    d3.select(event.currentTarget).attr("opacity", 0.7);
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    setTooltip({
+      visible: true,
+      x: event.clientX - rect.left + 10,
+      y: event.clientY - rect.top + 10,
+      content: `<div>${d.date}</div><div>$${d.expense.toLocaleString()}</div>`,
+    });
   };
 
   const handleMouseMove = (event) => {
-    // console.log("Mouse move:", event.pageX, event.pageY); 
-    if (tooltipRef.current) {
-      tooltipRef.current.style.left = `${event.pageX + 10}px`;
-      tooltipRef.current.style.top = `${event.pageY + 10}px`;
-    }
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    setTooltip((prev) => ({
+      ...prev,
+      x: event.clientX - rect.left + 10,
+      y: event.clientY - rect.top + 10,
+    }));
   };
 
-  const handleMouseOut = (event) => {
-    // console.log("Mouse out"); 
-    if (tooltipRef.current) {
-      tooltipRef.current.style.display = "none";
-    }
-    d3.select(event.currentTarget).attr("opacity", 1);
-    
+  const handleMouseOut = () => {
+    setTooltip((prev) => ({ ...prev, visible: false }));
   };
+
+  // Early returns
+  if (loading) {
+    return <div className="text-center py-4">Loading...</div>;
+  }
+  if (error) {
+    return <div className="text-center py-4 text-red-600">Error: {error}</div>;
+  }
+  if (data.length === 0) {
+    return <div className="text-center py-4">No data available</div>;
+  }
 
   return (
-    <div className="barChart">
-      <div className="chart-placeholder">
-        <h2>Daily Expenses for the Last 7 Days</h2>
-        <div className="chart-container">
-          <svg ref={svgRef}>
-            <g transform={`translate(${margin.left},${margin.top})`}>
-              {data.map((d, i) => (
-                <rect
-                  key={`bar-${i}`}
-                  x={xScale(data)(d.date)}
-                  y={yScale(data)(d.expense)}
-                  width={xScale(data).bandwidth()}
-                  height={chartHeight - yScale(data)(d.expense)}
-                  fill={d.color}
-                  style={{ pointerEvents: "all" }}
-                  onMouseOver={(e) => handleMouseOver(d, e)}
-                  onMouseMove={handleMouseMove}
-                  onMouseOut={handleMouseOut}
-                />
-              ))}
+    <div
+      className="barChart relative w-full overflow-visible"
+      ref={containerRef}
+      style={{ width, height: height + 50 }} // extra 50px for x‐axis labels
+    >
+      {/* Tooltip DIV */}
+      {tooltip.visible && (
+        <div
+          className="absolute bg-white border border-gray-300 rounded-md p-1 shadow-lg pointer-events-none text-sm"
+          style={{ left: tooltip.x, top: tooltip.y }}
+          dangerouslySetInnerHTML={{ __html: tooltip.content }}
+        />
+      )}
+
+      <svg width={width} height={height}>
+        <g transform={`translate(${margin.left}, ${margin.top})`}>
+          {/* Y‐axis baseline */}
+          <line x1={0} y1={0} x2={0} y2={chartHeight} stroke="#000" />
+
+          {/* X‐axis baseline */}
+          <line
+            x1={0}
+            y1={chartHeight}
+            x2={chartWidth}
+            y2={chartHeight}
+            stroke="#000"
+          />
+
+          {/* Y‐axis ticks & grid lines */}
+          {yTicks.map((value, i) => (
+            <g key={`y-tick-${i}`}>
+              <text
+                x={-10}
+                y={yScale(value, allValues)}
+                textAnchor="end"
+                dy="0.32em"
+                fontSize="12"
+                fill="#333"
+              >
+                ${value / 1000}k
+              </text>
+              <line
+                x1={0}
+                y1={yScale(value, allValues)}
+                x2={chartWidth}
+                y2={yScale(value, allValues)}
+                stroke="#ccc"
+                strokeWidth={1}
+              />
             </g>
-          </svg>
-        </div>
-      </div>
+          ))}
+
+          {/* Bars */}
+          {data.map((d, i) => {
+            const barWidth = chartWidth / data.length;
+            const barX = xScale(i, data.length) - barWidth / 2;
+            const barY = yScale(d.expense, allValues);
+            const barHeight = chartHeight - barY;
+
+            return (
+              <rect
+                key={`bar-${i}`}
+                x={barX}
+                y={barY}
+                width={barWidth}
+                height={barHeight}
+                fill="steelblue"
+                onMouseOver={(e) => handleMouseOver(d, e)}
+                onMouseMove={handleMouseMove}
+                onMouseOut={handleMouseOut}
+              >
+                <title>{`${d.date}: $${d.expense.toLocaleString()}`}</title>
+              </rect>
+            );
+          })}
+
+          {/* X‐axis labels */}
+          {data.map((d, i) => (
+            <text
+              key={`x-label-${i}`}
+              x={xScale(i, data.length)}
+              y={chartHeight + 20}
+              textAnchor="middle"
+              fontSize="12"
+              fill="#333"
+            >
+              {d.date}
+            </text>
+          ))}
+        </g>
+      </svg>
     </div>
   );
 }
