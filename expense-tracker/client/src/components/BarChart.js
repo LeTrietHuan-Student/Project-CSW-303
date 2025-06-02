@@ -13,17 +13,10 @@ import {
 } from "../javascripts/barData";
 
 function BarChart() {
-  const [data, setData] = useState([]);           // holds [{ date, expense }, …]
+  const [data, setData] = useState([]); // holds [{ date, expense }, …]
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Tooltip state
-  const [tooltip, setTooltip] = useState({
-    visible: false,
-    x: 0,
-    y: 0,
-    content: "",
-  });
   const containerRef = useRef(null);
 
   // Fetch data once on mount
@@ -55,33 +48,7 @@ function BarChart() {
     return Array.from(new Set(rounded)).sort((a, b) => a - b);
   })();
 
-  // Tooltip handlers
-  const handleMouseOver = (d, event) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setTooltip({
-      visible: true,
-      x: event.clientX - rect.left + 10,
-      y: event.clientY - rect.top + 10,
-      content: `<div>${d.date}</div><div>$${d.expense.toLocaleString()}</div>`,
-    });
-  };
-
-  const handleMouseMove = (event) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setTooltip((prev) => ({
-      ...prev,
-      x: event.clientX - rect.left + 10,
-      y: event.clientY - rect.top + 10,
-    }));
-  };
-
-  const handleMouseOut = () => {
-    setTooltip((prev) => ({ ...prev, visible: false }));
-  };
-
-  // Early returns
+  // Early returns in case of loading, error, or no data conditions
   if (loading) {
     return <div className="text-center py-4">Loading...</div>;
   }
@@ -94,32 +61,17 @@ function BarChart() {
 
   return (
     <div
-      className="barChart relative w-full overflow-visible"
+      className="barChart relative overflow-visible mx-auto"
       ref={containerRef}
-      style={{ width, height: height + 50 }} // extra 50px for x‐axis labels
+      style={{ width, height: height + 50, margin: "0 auto" }} // center the container
     >
-      {/* Tooltip DIV */}
-      {tooltip.visible && (
-        <div
-          className="absolute bg-white border border-gray-300 rounded-md p-1 shadow-lg pointer-events-none text-sm"
-          style={{ left: tooltip.x, top: tooltip.y }}
-          dangerouslySetInnerHTML={{ __html: tooltip.content }}
-        />
-      )}
-
       <svg width={width} height={height}>
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           {/* Y‐axis baseline */}
           <line x1={0} y1={0} x2={0} y2={chartHeight} stroke="#000" />
 
           {/* X‐axis baseline */}
-          <line
-            x1={0}
-            y1={chartHeight}
-            x2={chartWidth}
-            y2={chartHeight}
-            stroke="#000"
-          />
+          <line x1={0} y1={chartHeight} x2={chartWidth} y2={chartHeight} stroke="#000" />
 
           {/* Y‐axis ticks & grid lines */}
           {yTicks.map((value, i) => (
@@ -147,7 +99,9 @@ function BarChart() {
 
           {/* Bars */}
           {data.map((d, i) => {
-            const barWidth = chartWidth / data.length;
+            const slotWidth = chartWidth / data.length;
+            const gap = 5; // adjust for the gap between columns
+            const barWidth = slotWidth - gap;
             const barX = xScale(i, data.length) - barWidth / 2;
             const barY = yScale(d.expense, allValues);
             const barHeight = chartHeight - barY;
@@ -160,9 +114,8 @@ function BarChart() {
                 width={barWidth}
                 height={barHeight}
                 fill="steelblue"
-                onMouseOver={(e) => handleMouseOver(d, e)}
-                onMouseMove={handleMouseMove}
-                onMouseOut={handleMouseOut}
+                stroke="red" // light border around columns
+                strokeWidth={2}
               >
                 <title>{`${d.date}: $${d.expense.toLocaleString()}`}</title>
               </rect>
